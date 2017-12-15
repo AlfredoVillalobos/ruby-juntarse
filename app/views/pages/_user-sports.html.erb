@@ -1,0 +1,47 @@
+<% current_user.sports.where(id: @sports).each do |sport| %>
+  <div class="sport-box-map <% if @sport_selected.present? %> <% unless @sport_selected == sport.id %> opacity <%else %> selected <%end%><% else %> opacity <% end %>" value="<%= sport.id %>">
+    <div class="left box">
+      <div class="text sport"><h6><%= sport.name %></h6></div>
+      <img class="img-icon" src='<%= image_path("sports/#{sport.image}") %>' width="30px" alt="<%= sport.name %>" title="<%= sport.name %>"></li> 
+    </div>   
+    <div class="right-box">
+      <% sport.users.where(id: @users.pluck(:id)).limit(5).each do |user| %>
+        <div class="user-box <% if @users_selected.present? %> <% unless @users_selected.include?(user.id.to_s)%> opacity <%else%> selected <%end%> <% else %> opacity <% end %>" value="<%= user.id %>">    
+          <img class="img-icon" src='<%= image_path("users/boy-icon.png") if user.gender == 0 %><%= image_path("users/girl-icon.png") if user.gender == 1 %>' width="30px" title="<%= user.name %>"> 
+          <div class="text user"><h6><%= user.name.split[0] %></h6></div>
+          <img class="user-selected-icon" src="<%= image_path('users/user-icon.png') %>" value="<%= user.id %>"/>
+        </div>
+      <% end %>
+    </div>      
+  </div> 
+<% end %>
+<script>
+  $('.left.box').click(function(){
+    $('.contact-sender').fadeIn("slow")
+    if ($(this).parent().hasClass("opacity")){
+      $('.selected-users').find('ul').html("")
+      $('.user-box').each(function(){
+        !$(this).hasClass('opacity') ? $(this).addClass('opacity') : false;
+      })
+    }   
+    $('.sport-box-map').each(function(){
+      $(this).hasClass('opacity') ? false : $(this).addClass('opacity')
+      $(this).hasClass('selected') ? $(this).removeClass('selected') : false;
+    })
+    $(this).parent().toggleClass('opacity')
+    $(this).parent().addClass('selected')
+  })
+  $('.user-box').click(function(){
+    if ($(this).parent().parent().hasClass('selected')){
+      name = $(this).find('h6').html()
+      id = $(this).attr('value')
+      $(this).toggleClass('opacity')
+      var added = false
+      $('.selected-users').find('li').each(function(){
+        if ($(this).attr('id') == id){added = true}
+      })
+      if (!added){ $('.selected-users').find('ul').append("<li id='"+id+"'>"+name+"</li")
+      }else{$('.selected-users').find('#'+id).remove()}
+    }
+  })
+</script>

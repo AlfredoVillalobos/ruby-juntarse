@@ -1,0 +1,7 @@
+$('.form-container').html("<%= j render 'choose_disponibility'%>")
+
+$('.config').fadeIn("Slow")
+$('.step2').removeClass('current')
+$('.step2').addClass('visited')
+$('.step3').addClass('current')
+$('.step3').children().attr('style', "cursor:pointer")

@@ -1,0 +1,44 @@
+.config{
+  display: none;
+  .day-box{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+    .day-text{
+      width: 15%;
+      line-height: 50px;
+    }
+    .day-disponibility{
+      display: flex;
+      justify-content: space-around;
+      width: 65%;
+      border-radius: 12px;
+      border: 1px solid #FFE082;
+      overflow: hidden;
+      .disponibility{      
+        width: 33.3%;
+        padding: 5px;
+        height: 50px;
+        text-align: center;
+        font-size: 13px;
+        border-right: 1px solid #FFE082;
+        cursor: pointer;
+        span{
+          display: block;
+          font-size: 12px;
+        }
+      }
+      .selected{
+        background-color: #FFE082;
+      }
+      .disponibility.night{
+        border: 0px;
+      }
+      .title{
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+  }
+  
+}

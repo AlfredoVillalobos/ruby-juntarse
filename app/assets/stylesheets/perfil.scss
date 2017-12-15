@@ -1,0 +1,40 @@
+.perfil{
+  display:none;
+  .sex-box{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .active{
+    background-color: #4CD081;
+  }
+  .sex{
+    display: inline-block;
+    height: 30px;
+    border: 1px solid #ECEEF0;
+    width: 50%;
+    text-align: center;
+    line-height: 30px;
+    cursor:pointer;
+  }
+  .man{
+    border-radius: 20px 0px 0px 20px;
+  }
+  .woman{
+    border-radius: 0px 20px 20px 0px;
+  }
+  .age-box{
+    displaY: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    margin: 30px 0;
+  }
+  .slider-box{
+    width: 80%;
+    position: relative;
+    .slider{
+      position: absolute;
+      bottom: 1px;
+    }
+  }
+
+}

@@ -1,0 +1,21 @@
+<h6 class="title">Invitaciones</h6>
+<div class="line-separation"></div>
+<div class="invitations">
+  <ul>
+      <% @invitations.each do |invitation| %>
+      <li class="invitation-box <% if invitation.has_response? %>response<% else %>no-response<% end %>" data-invitation-id="<%= invitation.id %>">    
+        <img class="img-sport" src='<%= image_path("sports/#{invitation.sport.image}") %>' width="30px" title="<%= invitation.sport.name %>"> 
+        <div class="left">      
+          <img class="img-icon" src='<%= image_path("users/boy-icon.png") if invitation.from.gender == 0 %><%= image_path("users/girl-icon.png") if invitation.from.gender == 1 %>' width="30px" title="<%= invitation.from.name %>"> 
+          <div class="text user"><h6><%= h truncate(invitation.from.name.split[0], length: 8) %></h6></div>
+        </div>
+        <div class="right">
+          <h6><%= h truncate(invitation.content, length: 52) %></h6>
+        </div>
+        <div class="invitation-time">
+          <%= invitation.created_at.to_formatted_s(:short) %>
+        </div> 
+      </li>
+      <% end %>
+    </ul>
+</div>

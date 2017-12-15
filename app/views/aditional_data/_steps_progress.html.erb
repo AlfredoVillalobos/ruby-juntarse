@@ -1,0 +1,30 @@
+<ol class="cd-multi-steps text-top">
+  <li class="step1 current"><a >Deportes</a></li><!-- visited for already done -->
+  <li class="step2"><a>Perfil</a></li>
+  <li class="step3"><a>Config</a></li>
+</ol>
+<script>
+  $('.step1').click(function(){
+    $.ajax({
+      type: "GET",
+      url: '<%= steps_aditional_data_path %>',
+      data: { sports: sports },
+      dataType: "script",
+      }).done(function(){
+        $('.step2, .step3').removeClass('current')
+        $('.step1, .step2, .step3').removeClass('visited')
+        
+    });
+  })
+  $('.step2').click(function(){
+    $.ajax({
+      type: "POST",
+      url: '<%= choose_sports_aditional_data_path(current_user.id) %>',
+      data: { opcion: 1 },
+      dataType: "script",
+      }).done(function(){
+        $('.step3').removeClass('current')
+        $('.step3, .step2').removeClass('visited')
+    });
+  })
+</script>

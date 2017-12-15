@@ -1,0 +1,30 @@
+<div class="devise-form">
+  <div class="container">
+    <h6 class="login-title">INGRESA</h6>
+    <h6 class="login-subtitle">¡busca gente y haz deporte!</h6>
+    <br>
+    <br>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
+      </div>
+      <br>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Contraseña' %>
+      </div>
+      <br>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :recordarme %>
+        </div>
+      <% end -%>
+      <br>
+      <div class="actions">
+        <%= f.submit "Ingresar", class: 'btn btn-small btn-block btn-block btn-login', style:'color:#5CAF50'%>
+      </div>
+    <% end %>
+    <br>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

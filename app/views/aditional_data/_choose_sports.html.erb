@@ -1,0 +1,68 @@
+<div class="sports">
+  <h6 class="step-title">¿Qué deportes te interesan?</h6>
+  <% @sports.each do |sport| %>
+    <div class="sport-container">
+      <div class="img-box">
+        <img class="img-sport  <% if !@user_sport.where(sport_id: sport.id).present? %> opacity <% end %>" src='<%= image_path("sports/#{sport.image}")%>' value="<%= sport.id %>" alt="">
+      </div>
+      <div class="sport-right">
+        <div class="name <% if @user_sport.where(sport_id: sport.id).present? %> hidden <% end %>" for=""><%= sport.name %></div>
+        <div class="exp <% if !@user_sport.where(sport_id: sport.id).present? %> hidden <% end %>"><span style="float:left">Amateur</span><span  style="float:right">Profesional</span></div>
+        <div class="slider-box <% if !@user_sport.where(sport_id: sport.id).present? %> hidden <% end %>">
+          <input class="slider " type="range" min="1" max="9" value="<%= @user_sport.where(sport_id: sport.id)[0].expertice if @user_sport.where(sport_id: sport.id).present? %>">
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="line-separation"></div>
+  <br>
+  <button id="link-step2" class='btn btn-small btn-block btn-block btn-login' >
+    Siguiente
+  </button>
+</div>
+<script>
+
+  document.addEventListener("turbolinks:load", function(){
+    (function() {
+      if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(getAddress)
+      }else{
+        alert("Geolocation is nos supported")
+      }
+    })();
+  });
+
+  function getAddress(position){
+    $.ajax({
+      type: "POST",
+      url: "<%= findaddress_geocoder_index_path %>",
+      data: {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      },
+      dataType: "script",
+      success: function (response) {
+        console.log("tuve éxito")
+      }
+    });                  
+  }
+  var sports = { }
+  $(".img-sport, .name").on('click', function(){
+    sport_img = $(this).parent().parent().find(".img-sport")
+    sport_img.toggleClass("opacity")
+    $(this).parent().parent().find(".name, .exp, .slider-box").toggleClass("hidden")    
+  });
+  $("#link-step2").click(function(){
+    $('.img-sport').each(function(){
+      if (!$(this).hasClass('opacity')){
+        sport_expertice = $(this).parent().parent().find(".slider").val()
+        sports[$(this).attr('value')] = sport_expertice
+      }
+    })
+    if (Object.keys(sports).length == 0){
+      alert("Debe seleccionar algún deporte")
+    }else{
+      $.post('<%= choose_sports_aditional_data_path(current_user.id) %>', {sports: sports},"script");
+    }
+  });
+</script>

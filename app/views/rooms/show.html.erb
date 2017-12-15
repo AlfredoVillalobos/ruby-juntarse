@@ -1,0 +1,9 @@
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<form action="">
+  <label for="Say somemething"></label>
+  <input type="text" data-behavior="room_speaker">
+  <input type="hidden" value="<%= current_user.id %>" data-behavior="room_speaker">
+</form>

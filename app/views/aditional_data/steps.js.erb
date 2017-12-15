@@ -1,0 +1,4 @@
+$('.form-container').html("")
+$('.form-container').html("<%= j render 'choose_sports' , sports: @sports  %>")
+$('.step2').removeClass('current')
+$('.step1').addClass('current')

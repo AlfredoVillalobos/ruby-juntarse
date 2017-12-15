@@ -1,0 +1,7 @@
+$('.form-container').html("<%= j render 'choose_gender_and_age'%>")
+$('.perfil').fadeIn("Slow")
+$('.step1').removeClass('current')
+$('.step1').addClass('visited')
+$('.step2').addClass('current')
+$('.step2').children().attr('style', "cursor:pointer")
+$('.step1').children().attr('style', "cursor:pointer")

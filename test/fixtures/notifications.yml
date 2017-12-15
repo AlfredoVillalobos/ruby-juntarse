@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_from: one
+  user_to: one
+  sport: one
+  content: MyString
+
+two:
+  user_from: two
+  user_to: two
+  sport: two
+  content: MyString

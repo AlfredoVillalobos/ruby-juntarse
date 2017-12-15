@@ -1,0 +1,96 @@
+<h6 class="title">Criterios de Búsqueda</h6>
+<div class="line-separation"></div>
+<div class="filter-container">
+  <div class="filter-box">
+    <span>Género</span>
+    <div class="filter_">
+      <div class="gender two-options left noselect <% if current_user.gender == 0 %>active<% end %>" >Hombres</div>
+      <div class="gender two-options right noselect <% if current_user.gender == 1 %>active<% end %>" >Mujeres</div>
+    </div>
+  </div>
+  <div class="filter-box slider_">
+    <span>Rango de edad</span>
+    <div class="filter">
+      <div id="slider" class="range"></div>
+    </div>
+  </div>
+  <div class="filter-box">
+    <span>Nivel de Juego</span>
+    <% @sports.each do |sport| %>
+      <div class="sport-box ">
+        <div class="sport-name noselect" id="<%= sport.id %>"><%= sport.name %></div>
+        <div class="filter sport">
+            <div class="expertice two-options up noselect active">Similar al mio</div>
+            <div class="expertice two-options down noselect">No importa</div>
+        </div>
+      </div>
+    <% end %>
+  </div>    
+  <div class="filter-box slider_">
+    <span>Kilómetros a la redonda</span>
+    <div class="filter">
+      <div id="slider-range" class="range"></div>
+    </div>
+  </div>
+</div>
+<div class="line-separation"></div>
+<br>
+<button id="link-search" class='btn btn-small btn-block btn-block btn-login '>
+  Buscar deportistas
+</button>
+<script>
+  $('.sport-name').click(function(){
+    $(this).toggleClass('opacity')
+    $(this).parent().find('.expertice').toggleClass('opacity')
+  })
+  $('.gender.two-options').click(function(){
+    $(this).toggleClass('active')
+    $(this).addClass('no-hover')
+  })
+  $('.expertice.two-options.up').click(function(){
+    $(this).addClass('active')
+    $(this).addClass('no-hover')
+    $(this).parent().find('.expertice.two-options.down').removeClass('active')
+  })
+  $('.expertice.two-options.down').click(function(){
+    $(this).addClass('active')
+    $(this).addClass('no-hover')
+    $(this).parent().find('.expertice.two-options.up').removeClass('active')
+  })
+  $('.two-options').mouseout(function(){
+    $(this).removeClass('no-hover')
+    $(this).hover(function(){
+      $(this).addClass('active-hover')
+      $(this).removeClass('active-hover')
+    })
+  })
+  
+  var slider = document.getElementById('slider');
+  noUiSlider.create(slider, {
+    start: [ <%= current_user.age > 25 ? current_user.age - 7 : 18  %>, <%= current_user.age + 7 %> ],
+    connect: true,
+    range: {
+      'min': 18,
+      'max': 99
+    }
+  });
+  $('#slider').find('.noUi-handle-lower').append("<div class='value-box left'></div>")
+  $('.noUi-handle-upper').append("<div class='value-box right'></div>")
+  slider.noUiSlider.on('update', function(values, handle) {
+    $('.value-box.left').html(parseInt(values[0]))
+    $('.value-box.right').html(parseInt(values[1]))
+  });
+
+  var rangeSlider = document.getElementById('slider-range');
+  noUiSlider.create(rangeSlider, {
+    start: [ 5 ],
+    range: {
+      'min': [ 1 ],
+      'max': [ 99 ]
+    }
+  });
+  $('#slider-range').find('.noUi-handle-lower').append("<div class='value-box km'></div>")
+  rangeSlider.noUiSlider.on('update', function( values, handle ) {
+    $('.value-box.km').html(parseInt(values[0]))
+  });
+</script>

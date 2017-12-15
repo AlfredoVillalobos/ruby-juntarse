@@ -1,0 +1,19 @@
+<div class="main-container">
+  <nav class="left-sidebar">
+    <%= render 'pages/left-sidebar/invitations' %>      
+  </nav>
+  <div class="main">
+    <%= render 'pages/main/invitations' %>
+  </div>
+</div>
+<script>
+  $('.invitation-box').click(function(){
+    invitation_id = $(this).data("invitation-id")
+    $.ajax({
+      type: "post",
+      url: "<%= invitations_pages_path%>",
+      data: {invitation_id: invitation_id},
+      dataType: "script",
+    });
+  })
+</script>

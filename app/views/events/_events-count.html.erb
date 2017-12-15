@@ -1,0 +1,8 @@
+<div class="event">
+  <div id="events">
+    <img src="<%= image_path('notification-icon.png')%>" alt="">
+    <div class="event-count" data-user-id="<%= current_user.id %>">
+      <%= current_user.events.where(viewed: false).count < 100 ? current_user.events.where(viewed: false).count : 99 %>
+    </div>
+  </div>
+</div>

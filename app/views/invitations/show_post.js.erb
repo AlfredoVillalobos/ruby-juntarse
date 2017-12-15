@@ -1,0 +1,3 @@
+$('.modal').remove()
+$('.modal-backdrop').remove()
+$('<%= j render "modals/modal-show-invitation", invitation: @invitation%>').modal()

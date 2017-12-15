@@ -1,0 +1,107 @@
+.main{
+  width: 700px;
+  padding: 20px 25px;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid #DDDDDD;
+
+  .title{
+    text-align: center;
+    font-weight: 400;
+  }
+  .users{
+    display:flex;
+  }
+  .searched-users{
+    width:70%;
+    .sport-box-map{
+      display: flex;
+      height: 50px;
+      .left.box{
+        height: 100%;
+        margin-right: 10px;
+        border-right: 1px solid #DDDDDD;
+        width: 18%;
+        position:relative;
+        cursor: pointer;
+      }
+
+      .text{
+        background-color: #FFE082;
+        width:70px;
+        height: 16px;
+        bottom: 0px;
+        position: absolute;
+        z-index: 1;
+        border-radius: 5px;
+        h6{
+          line-height: 16px;
+          text-align: center;
+          color: #5CAF50;
+          font-size: 12px;
+        }
+      }
+
+      .img-icon {
+        width: 41px;
+        top: 3px;
+        left: 14px;
+        position: absolute;
+      }
+      .user-selected-icon {
+        display: none;
+        width: 21px;
+        top: 1px;
+        right: 9px;    
+        position: absolute;
+      }
+
+      .user-box{
+        border:none;
+        width:72px;
+        margin: 0;
+        position:relative;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        .text{
+          background-color: #5CAF50;
+          h6{
+            text-align: center;
+            color: #FFE082;
+          }
+        }
+      }
+      .right-box{
+        display: flex;
+        width:82%;
+        overflow: hidden;
+      }
+    }  
+  }
+  .contact-sender{
+    width:30%;
+    height: 150px;
+    padding:10px;
+    display:none;
+    h6{
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom:10px;
+    }
+    .selected-users{
+      height: 60%;
+      li{
+        background-color: #5CAF50;
+        margin: 1px;
+        font-size: 13px;
+        padding: 0 5px;
+        border-radius: 9px;
+        height: 18px;
+        color: #FFE082;
+        line-height: 18px;
+        display:inline-block;
+      }
+    }
+  }
+}

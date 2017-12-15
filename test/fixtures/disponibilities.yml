@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 1
+  morning: 1
+  afternoon: 1
+  night: 1
+  user: one
+
+two:
+  day: 1
+  morning: 1
+  afternoon: 1
+  night: 1
+  user: two

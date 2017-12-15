@@ -1,0 +1,148 @@
+
+  <h6 class="title">Deportistas cerca tuyo</h6>
+  <div class="line-separation"></div>
+  <div class="users">
+    <div class="searched-users">
+        <%= render 'user-sports', users: @users %>
+    </div>
+    <div class="contact-sender">
+      <h6>Usuarios seleccionados</h6>
+      <div class="selected-users">
+        <ul></ul>
+      </div>
+      <button id="link-invite" class='btn btn-small btn-block btn-block btn-login '>
+        Invitar deportistas
+      </button>
+    </div>            
+  </div>
+  <div class="line-separation"></div>
+  <div class="map-box">
+      <div style='width: 100%;'>
+        <div id="map" style='width: 100%; height: 400px;'></div>
+      </div>
+  </div>
+</div>
+<script>
+  $('#link-invite').click(function(){
+    var selected_users = []
+    $('.selected-users').find('li').each(function(){
+      selected_users.push(parseInt($(this).attr('id')))
+    })
+    if (selected_users.length == 0){
+      alert("Debe haber seleccionado algún deportista")
+    }else{
+      $.ajax({
+        type: "POST",
+        url: "<%= invite_users_invitations_path %>",
+        data: {
+          users: selected_users,
+          sport: $(".sport-box-map.selected").attr('value')
+        },
+        dataType: "script",
+        success: function (hash) {
+        }
+      });
+    }
+  })
+  var sports = {}
+  var gender = []
+  var markers_ = []
+  var markers = []
+  var users_= []
+  var user_position = {lat: <%= current_user.latitude %>, lng: <%= current_user.longitude %>};
+  map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: user_position,
+        mapTypeId: 'terrain'
+      });
+  var marker = new google.maps.Marker({
+    position: user_position,
+    map: map,
+    title: "Tú",
+    icon: "<%= image_path('users/you-icon.png') %>"
+  });   
+  fillMap(<%= raw @hash.to_json %>, <%= raw @users.to_json %>);
+  $('#link-search').click(function(){
+    ($('.gender.left').hasClass("active")) ? gender.push(0) : false ;
+    ($('.gender.right').hasClass("active")) ? gender.push(1) : false ;
+    $('.sport-box').each(function(){
+      if (!$(this).find('.sport-name').hasClass('opacity')){
+        sports[$(this).find('.sport-name').attr('id')] = ($(this).find('.expertice.up').hasClass('active')) ? 0 : 1;
+      }
+    })
+    $.ajax({
+      type: "POST",
+      url: "<%= dashboard_pages_path %>",
+      data: {
+        gender: gender, 
+        ageRange: [$('.value-box.left').html(), $('.value-box.right').html()],
+        sports: sports,
+        km: $('.value-box.km').html()
+      },
+      dataType: "json",
+      beforeSend: function(){
+        if ( parseInt($('.value-box.km').html()) > 15) {
+          map.setZoom(12)
+        }else{
+          map.setZoom(14)
+        }
+      },
+      success: function (hash) {
+        gender = []
+        sports = []
+        sports = {}
+        selected_users = []
+        $('.selected-users').find('li').each(function(){
+          selected_users.push(parseInt($(this).attr('id')))
+        })
+
+        setTimeout(function(){
+          markers.forEach(function(e){
+            e.setMap(null);
+          });
+          fillMap(JSON.parse(hash.users_map), JSON.parse(hash.users))
+          $.ajax({
+            type: "POST",
+            url: "<%= searched_users_pages_path %>",
+            data: {
+              users: JSON.parse(hash.users),
+              sportSelected: $(".sport-box-map.selected").attr('value'),
+              usersSelected: selected_users
+            },
+            dataType: "script",
+            success: function (hash) {
+            }
+          });
+        }, 500)
+      }
+    });
+  })
+  function fillMap(markers_, users_){
+    i = 0;
+    markers_.forEach(function(e){
+      var marker = new google.maps.Marker({
+        position: e,
+        map: map,
+        title: users_[i].name,
+        id: users_[i].id,
+        icon: "<%= image_path('users/user-icon.png') %>"
+      });
+      i++;
+      google.maps.event.addListener(marker, 'click', function(){
+        userMapId = $(this).attr('id')
+        $('.user-box').each(function(){
+          if ($(this).attr('value') == userMapId){
+            $(this).find('.user-selected-icon').fadeIn("slow");
+            if ($(this).parent().parent().hasClass('selected')){
+              $(this).removeClass('opacity')
+            }
+            setTimeout(function(){
+              $('.user-selected-icon').fadeOut();
+            },2000)
+          }
+        })
+      });
+      markers.push(marker)
+    });
+  }
+</script>

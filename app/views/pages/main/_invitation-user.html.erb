@@ -1,0 +1,109 @@
+<div class="up">
+    <div class="left">
+      <div>
+        <img class="img-icon" src='<%= image_path("users/boy-icon.png") if @invitation.from.gender == 0 %><%= image_path("users/girl-icon.png") if @invitation.from.gender == 1 %>'
+          width="30px" title="<%= @invitation.from.name %>">
+      </div>
+    </div>
+    <div class="right">
+      <div class="user-from-data">
+        <div class="item">
+          <span class="data-info-label">Nombre:</span>
+          <h6 class="data-info-content">
+            <%= @invitation.from.name %>
+          </h6>
+        </div>
+        <div class="item">
+          <span class="data-info-label">Edad:</span>
+          <h6 class="data-info-content">
+            <%= @invitation.from.age %>
+          </h6>
+        </div>
+        <div class="item">
+          <span class="data-info-label">Distancia:</span>
+          <h6 class="data-info-content">
+            <% if @distance_from_user < 1 %>
+                Menos de 1 Kilomentro
+            <% else %>
+              <%= @distance_from_user.to_nearest_i %>
+            <% end %>
+          </h6>
+        </div>
+        <div class="item">
+          <span class="data-info-label">Ha invitado:</span>
+          <h6 class="data-info-content">
+            <%= @invitation.from.invitations_to.count %> veces</h6>
+        </div>
+        <div class="item">
+          <span class="data-info-label">Ha sido invitado:</span>
+          <h6 class="data-info-content">
+            <%= @invitation.from.invitations_from.count %> veces</h6>
+        </div>
+      </div>
+      <ul class="user-sports">
+        <% @invitation.from.sports.each do |sport| %>
+          <li class="sport">
+            <img class="img-sport" src='<%= image_path("sports/#{sport.image}")%>' width="70px" title="<%= sport.name %>">
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="down">
+    <div class="content bubble" maxlength="150"><%= @invitation.content %></div>
+    <% if @invitation.has_response? %>
+      <h6 class="title">Ya respondiste a esta invitación</h6>
+    <% else %>
+      <h6 class="title">Responde tu invitación</h6>
+    <% end %>
+    <div class="line-separation"></div>
+
+    <% if @invitation.has_response? %>
+      <h6 class="title"><%= @invitation.response.content %></h6>
+    <% else %>
+      <textarea class="content response_" maxlength="150" placeholder="Respóndele a <%= @invitation.from.name.split[0] %>"></textarea>
+    <% end %>
+    <div class="invitation-footer" data-invitation-id="<%= @invitation.id %>">
+      <% if @invitation.has_response? %>
+        <button class='btn btn-small btn-block btn-block btn-login has_reponse' data-value="0">
+          <% if @invitation.response == 1 %> No me interesa <% else %> Me interesa <% end %>
+        </button>
+      <% else %>
+        <button class='btn btn-small btn-block btn-block btn-login no link-response-invitation' data-value="0">
+          No me interesa
+        </button>
+        <button class='btn btn-small btn-block btn-block btn-login yes link-response-invitation' data-value="1">
+          ¡Me interesa!
+        </button>
+      <% end %>
+    </div>
+  </div>
+  <script>
+      $('.link-response-invitation').click(function(){
+        invitation = $(this).parent().data("invitation-id");
+        response = $(this).data("value")
+        $('.invitation-box[data-invitation-id="'+invitation+'"]').addClass("response")
+        $('.invitation-box[data-invitation-id="'+invitation+'"]').removeClass("no-response")
+        $.ajax({
+          type: "post",
+          url: "/invitations/response_invitation/"+invitation,
+          data: {
+            response: response,
+            content: $('.content.response_').val()
+          },
+          dataType: "json",
+          success: function (events) {
+            data = { user_id : <%= current_user.id %>,
+                      events : events
+                    }
+            App.activity.received(data)
+            $.ajax({
+              type: "post",
+              url: "<%= invitations_pages_path%>",
+              data: {invitation_id: invitation},
+              dataType: "script",
+            });
+          }
+        });    
+      });
+    </script>

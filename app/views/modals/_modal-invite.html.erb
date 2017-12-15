@@ -1,0 +1,56 @@
+<div id="product-modal" class="modal fade" data-sport="<%= @sport %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Conoce a deportistas como tú</h4>
+      </div>
+        <div class="modal-body resize-modal">
+          <div class="users-group">
+          <% @users.each do |user| %>
+            <div class="user-selected-box modal-middle" data-user="<%= user.id %>">
+              <span class="delete" title="eliminar de la selección">X</span>
+              <div class="left">
+                <img class="img-icon" src='<%= image_path("users/boy-icon.png") if user.gender == 0 %><%= image_path("users/girl-icon.png") if user.gender == 1 %>' width="30px" title="<%= user.name %>"> 
+                <div class="text user"><h6><%= user.name.split[0] %></h6></div>
+              </div>
+              <div class="right">
+                <div class="text comments"><h6></h6></div>
+                <div class="right-comments">
+                  <% if user.comments.count >0 %>
+                    <% user.comments.order(updated_at: :desc).limit(3).each do |comment| %>
+                      <div class="comment">
+                        <div class="comment-from">
+                          <%= User.find(comment.from).name.split[0] %>:
+                        </div>
+                        <div class="comment-box">
+                          "<%= comment.content %>"
+                        </div>
+                        <div class="comment-time">
+                          <%= comment.created_at.to_formatted_s(:short) %>
+                        </div> 
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <div class="comment" style="padding-top:20px">
+                      Este usuario no tiene comentarios aún
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <textarea class="content" maxlength="150" placeholder="Escríbiles un mensaje personalizado"></textarea>
+        </div>
+        <div class="modal-footer resize-modal">
+          <button id="link-send-invitation" class='btn btn-small btn-block btn-block btn-login '>
+              Enviar Invitación
+          </button>
+        </div>
+    </div>
+  </div>
+  <script>
+    $('.delete').click(function(){$(this).parent().remove()})
+  </script>
+</div>

@@ -1,0 +1,102 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.events{
+  position:relative;
+  .event{
+    img{
+      width: 35px;
+      top: 35px;
+      right: 2px;
+      position: absolute;
+      cursor:pointer;
+    }
+    .event-count{
+      border-radius: 50%;
+      background-color: red;
+      border: 2px solid white;
+      height: 22px;
+      width: 22px;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      position: absolute;
+      top: 50px;
+      right: -4px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor:pointer;
+    }
+    .events-box{
+      position:absolute;
+    }
+  }
+}
+.events-container{
+  position: relative;
+}
+.last-events{
+  display:none;
+  z-index: 1;
+  background-color: white;
+  position: absolute;
+  top: 110px;
+  width: 300px;
+  right: -18px;
+  z-index:2;
+  .event-message:last-child{
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    h6{
+      color: #5CAF50;
+    }
+    a{
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .event-message{
+    background-color: rgba(255, 224, 130, 0.5);
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 8px;
+    display: flex;
+    line-height: 60px;
+    padding: 5px;
+    cursor: pointer;
+    h6{
+      width:100%;
+      font-size: 12px;  
+      text-align: center;
+    }
+    .message-icon{
+      width: 20%;
+      position:relative;
+      img{
+        position:absolute;
+        top:10px;
+        left:8px;
+      }
+    }
+    .message-text{
+      width: 80%;
+      position: relative;
+      .text{
+        font-size: 11px;
+        color: #5CAF50;
+      }
+      .from{
+        position: absolute;
+        line-height: 15px;
+        font-weight: 700;
+        bottom: 0;
+        right: 10px;
+        font-size: 10px;        
+      }
+    }
+
+  }
+  .event-message:hover{
+    background-color: #ffe082;
+  }
+}

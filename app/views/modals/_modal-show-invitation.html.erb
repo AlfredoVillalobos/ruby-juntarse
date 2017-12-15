@@ -1,0 +1,70 @@
+<div id="product-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Invitación</h4>
+      </div>
+        <div class="modal-body resize-modal">
+          <div class="user-response modal-middle">
+            <div class="left">
+              <img class="img-icon" src='<%= image_path("users/boy-icon.png") if @invitation.from.gender == 0 %><%= image_path("users/girl-icon.png") if @invitation.from.gender == 1 %>' width="30px" title="<%= @invitation.from.name %>"> 
+              <div class="text user"><h6><%= @invitation.from.name.split[0] %></h6></div>
+            </div>
+            <div class="right">
+              <div class="text comments"><h6>Otros usuarios comentan</h6></div>
+              <div class="right-comments">
+                <% @invitation.from.comments.order(updated_at: :desc).limit(3).each do |comment| %>
+                  <div class="comment">
+                    <div class="comment-from">
+                      <%= @invitation.from.name.split[0] %>:
+                    </div>
+                    <div class="comment-box">
+                      "<%= comment.content %>"
+                    </div>
+                    <div class="comment-time">
+                      <%= comment.created_at.to_formatted_s(:short) %>
+                    </div> 
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="content bubble" maxlength="150"><%= @invitation.content %></div>
+          <textarea class="content response_" maxlength="150" placeholder="Respóndele a <%= @invitation.from.name.split[0] %>"></textarea>
+        </div>
+        <div class="modal-footer resize-modal" data-invitation-id="<%= @invitation.id %>">
+          <button class='btn btn-small btn-block btn-block btn-login no link-response-invitation' data-value="0">
+            No me interesa
+          </button>
+          <button class='btn btn-small btn-block btn-block btn-login yes link-response-invitation' data-value="1">
+            ¡Me interesa!
+          </button>
+        </div>
+    </div>
+  </div>
+  <script>
+    $('.link-response-invitation').click(function(){
+      invitation = $(this).parent().data("invitation-id");
+      response = $(this).data("value")
+      $.ajax({
+        type: "post",
+        url: "/invitations/response_invitation/"+invitation,
+        data: {
+          response: response,
+          content: $('.content.response_').val()
+        },
+        dataType: "json",
+        success: function (events) {
+          $('.modal').fadeOut()
+          $('.modal').remove()
+          $('.modal-backdrop').remove()
+          data = { user_id : <%= current_user.id %>,
+                    events : events
+                  }
+          App.activity.received(data)
+        }
+      });    
+    });
+  </script>
+</div>

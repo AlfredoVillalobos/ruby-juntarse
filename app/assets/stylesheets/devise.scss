@@ -1,0 +1,84 @@
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.btn-login {
+  background-color: #FFE082;
+}
+.btn-small {
+  padding: 8px 0;
+  font-size: 13px;
+}
+.btn-fbblue-dark {
+  background-color: #3b579d;
+  border-color: #3b579d;
+}
+.btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  color: #5CAF50;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  white-space: nowrap;
+  line-height: 20px;
+  font-weight: 700;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.devise-form{
+  padding-top: 15%;
+  width: 400px;
+  margin: 0 auto;
+  .container{
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+  .btn-fbblue {
+    background: #2275d1;
+    color: #fff;
+    border-color: #2275d1;
+  }
+  input[type=text], input[type=email], input[type=password], .fake-input {
+    width: 93%;
+    display: block;
+    border: 2px solid #ebebeb;
+    background: #fff;
+    font: 500 15px/22px "museo-sans-rounded",sans-serif;
+    padding: 5px 10px;
+    color: #4b4b4b;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    -webkit-font-smoothing: antialiased;
+    text-align: left;
+    line-height: 24px;
+  }
+  input[type=submit]{
+    color: #4b4b4b;
+  }
+  .login-title{
+    color: #4b4b4b;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  .login-subtitle{
+    color: #4b4b4b;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+}

@@ -1,0 +1,49 @@
+<div class='perfil'>
+  <h6 class="step-title">Cuéntanos un poco más de ti</h6>
+  <div class="sex-box">
+    <div class="man <% if !current_user.gender.nil? %> <% if current_user.gender == 0 %>active<%end%><%end%> sex" value="0">Hombre</div><div class="woman <% if !current_user.gender.nil? %><% if current_user.gender == 1 %>active<%end%><%end%>  sex" value="1">Mujer</div>
+  </div>
+  <div class="age-box">
+    <span>Edad: </span>
+    <div class="slider-box">
+      <input class="slider age" oninput="sliderChange(this.value)" type="range" min="18" max="99" value="<% if current_user.age.nil? %>18<% else %><%= current_user.age %><%end%>">
+    </div>
+    <span class="dinamic-age">
+      <% if current_user.age.nil? %>18<% else %><%= current_user.age %><%end%>
+    </span>
+  </div>
+  <div class="line-separation"></div>
+  <br>
+  <button id="link-step3" class='btn btn-small btn-block btn-block btn-login' >
+    Siguiente
+  </button>
+</div>
+<script>
+  $('.sex').click(function(){
+    $('.sex').removeClass('active')
+    $(this).addClass("active")
+  })
+  $("#link-step3").click(function(){
+    age = $('.dinamic-age').html()
+    gender = $('.sex.active').attr("value")
+    if (!gender){alert("Debe seleccionar sexo")}
+    else{
+      $.ajax({
+        type: "POST",
+        url: '<%= choose_gender_and_age_aditional_data_path(current_user.id) %>',
+        data: { age: age,
+                gender: gender
+              },
+        dataType: "script",
+        }).done(function(data){
+          console.log('llegué')
+      });
+    }    
+  });
+
+  function sliderChange(e){
+    $('.dinamic-age').html(e)
+  }
+
+    
+</script>

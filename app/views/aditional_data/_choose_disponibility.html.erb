@@ -1,0 +1,294 @@
+<div class='config'>
+  <h6 class="step-title">Generalmente, ¿Cuańdo estás disponible?</h6>
+  <div class="day-box">
+    <div class="day-text">Lunes</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 1).present? %>
+          <% if User.first.disponibilities.where(day: 1)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 1).present? %>
+          <% if User.first.disponibilities.where(day: 1)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 1).present? %>
+          <% if User.first.disponibilities.where(day: 1)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="day-box">
+    <div class="day-text">Martes</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 2).present? %>
+          <% if User.first.disponibilities.where(day: 2)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 2).present? %>
+          <% if User.first.disponibilities.where(day: 2)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 2).present? %>
+          <% if User.first.disponibilities.where(day: 2)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="day-box">
+    <div class="day-text">Miércoles</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 3).present? %>
+          <% if User.first.disponibilities.where(day: 3)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 3).present? %>
+          <% if User.first.disponibilities.where(day: 3)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 3).present? %>
+          <% if User.first.disponibilities.where(day: 3)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="day-box">
+    <div class="day-text">Jueves</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 4).present? %>
+          <% if User.first.disponibilities.where(day: 4)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 4).present? %>
+          <% if User.first.disponibilities.where(day: 4)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 4).present? %>
+          <% if User.first.disponibilities.where(day: 4)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="day-box">
+    <div class="day-text">Viernes</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 5).present? %>
+          <% if User.first.disponibilities.where(day: 5)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 5).present? %>
+          <% if User.first.disponibilities.where(day: 5)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 5).present? %>
+          <% if User.first.disponibilities.where(day: 5)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>   
+  <div class="day-box">
+    <div class="day-text">Sábado</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 6).present? %>
+          <% if User.first.disponibilities.where(day: 6)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 6).present? %>
+          <% if User.first.disponibilities.where(day: 6)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 6).present? %>
+          <% if User.first.disponibilities.where(day: 6)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="day-box">
+    <div class="day-text">Domingo</div>
+    <div class="day-disponibility">
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 7).present? %>
+          <% if User.first.disponibilities.where(day: 7)[0].morning %> 
+            selected 
+          <% end %>
+        <% end %>
+        morning" 
+        value="0">
+        <span class="title">Mañana</span>
+        <span class="sub-title">(6 a 12 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 7).present? %>
+          <% if User.first.disponibilities.where(day: 7)[0].afternoon %> 
+            selected 
+          <% end %>
+        <% end %>
+        afternoon" value="1">
+        <span class="title">Tarde</span>
+        <span class="sub-title">(12 a 18 hrs)</span>
+      </div>
+      <div class="disponibility 
+        <% if User.first.disponibilities.where(day: 7).present? %>
+          <% if User.first.disponibilities.where(day: 7)[0].night %> 
+            selected 
+          <% end %>
+        <% end %>
+        night" value="2">
+        <span class="title">Tarde-Noche</span>
+        <span class="sub-title">(18 a 22 hrs)</span> 
+      </div>
+    </div>
+  </div>
+  <div class="line-separation"></div>
+  <br>
+  <button id="link-end" class='btn btn-small btn-block btn-block btn-login'>
+    Siguiente
+  </button>
+</div>
+
+<script>
+ 
+  $('.disponibility').click(function(){
+    $(this).toggleClass("selected")
+  })
+  var disponibilities = {}
+  $('#link-end').click(function(){
+    var i = 1
+    $('.day-text').each(function(){
+      var disponibility = []
+      day = $(this).html()
+      $(this).parent().find('.disponibility').each(function(){
+        if ($(this).hasClass("selected")){
+          disponibility.push($(this).attr('value'))
+          disponibilities[i] = disponibility
+        }
+      })
+      i++
+    })
+    if (Object.keys(disponibilities).length == 0){
+      alert("Debe seleccionar alguna disponibilidad")
+    }else{
+      $.ajax({
+        type: "POST",
+        url: '<%= chose_disponibility_aditional_data_path(current_user.id) %>',
+        data: { disponibilities: disponibilities },
+        dataType: "script",
+        }).done(function(data){
+          console.log('paso 3 -listo')
+      });
+    }
+  })
+</script>
