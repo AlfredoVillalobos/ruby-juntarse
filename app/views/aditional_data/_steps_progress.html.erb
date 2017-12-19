@@ -8,23 +8,43 @@
     $.ajax({
       type: "GET",
       url: '<%= steps_aditional_data_path %>',
-      data: { sports: sports },
+      data: { action_sender: '<%= @action %>'},
       dataType: "script",
       }).done(function(){
         $('.step2, .step3').removeClass('current')
-        $('.step1, .step2, .step3').removeClass('visited')
-        
+        $('.step1, .step2, .step3').removeClass('visited')        
     });
   })
   $('.step2').click(function(){
-    $.ajax({
-      type: "POST",
-      url: '<%= choose_sports_aditional_data_path(current_user.id) %>',
-      data: { opcion: 1 },
-      dataType: "script",
-      }).done(function(){
-        $('.step3').removeClass('current')
-        $('.step3, .step2').removeClass('visited')
-    });
+    _sports = <%= current_user.sports.count %>
+    if(_sports > 0){
+      $.ajax({
+        type: "POST",
+        url: '<%= choose_sports_aditional_data_path %>',
+        data: { action_sender: '<%= @action %>' },
+        dataType: "script",
+        }).done(function(){
+          $('.step1, .step3').removeClass('current')
+          $('.step2, .step3').removeClass('visited')
+          $('.step2').addClass('current')
+      });
+    }
+  })
+  $('.step3').click(function(){
+    age = <%= current_user.age.nil? %>
+    gender = <%= current_user.gender.nil? %>
+    sports = <%= current_user.sports.count %>
+    if(!age && !gender && sports > 0){
+      $.ajax({
+        type: "POST",
+        url: '<%= choose_disponibility_aditional_data_path %>',
+        data: { action_sender: '<%= @action %>' },
+        dataType: "script",
+        }).done(function(){
+          $('.step1, .step2').removeClass('current')
+          $('.step1, .step2').addClass('visited')
+          $('.step3').addClass('current')
+      });
+    }    
   })
 </script>

@@ -117,6 +117,7 @@ div{
 body {
   width: 100vw;
   height: 100vh;
+  max-height: 100vh;
   display: block;
   position: relative;
   font-family: 'Work Sans';
@@ -162,26 +163,26 @@ body::after {
   background: #F9F9F7;
   height: 100px;
   line-height: 100px;
-  border-bottom: 10px solid #FFE082;
-  
+  border-bottom: 10px solid #FFE082;  
   .central {
     display: block;
     max-width: 1100px;
     margin: 0 auto;
     height: 100%;
-}
+  }
+  .logo-image{
+    width:180px; 
+    margin-top:30px;
+  }
   .col{
     height: 100%;
     float: left;
   }
   .logo {
-    min-width: 180px;
+    width: 60%;
   }
   .col1 {
-    width: 10%;
-  }
-  .col6 {
-    width: 63%;
+    width: 20%;
   }
   .contBlock.event{
     padding-right: 12px;
@@ -194,9 +195,7 @@ body::after {
     z-index: 999;
     display: inline;
     list-style: none;
-    width: 100%;
     margin-left: -12px;
-
     li {
       line-height: 100px;
       display: block;
@@ -268,5 +267,77 @@ body::after {
   }
   li:hover{
     background-color:	rgba(255, 224, 130, 1);
+  }
+}
+@media screen and (max-width: 500px) {
+  body{
+    height: 85vh;
+    margin-top: 10vh;
+  }
+  .devise-form{
+    width:84vw;
+  }
+  .nav-bar .col6{
+    width:16%;
+  }
+  .nav-bar, .hamburger{
+    height: 10vh;
+  }
+  .nav-bar{
+    position:fixed;
+    top:0;
+    width:100vw;
+  }
+  .hamburger-box{
+    margin-top:0;
+  }
+  .hamburger{
+    padding: 0px 18px;
+  }
+  .events .event img{
+    top: 24px;
+  }
+  .events .event .event-count{
+    top: 40px;
+  }
+  .nav-bar .logo-image{
+    width: 114px;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  .info-container {
+    width: 95vw;
+    margin-top: 90px;
+    padding-bottom:5px;
+  }
+  .sport-container .img-box .img-sport {
+    width: 60px;
+  }
+  .sport-container .sport-right {
+    height: 70px;
+  }
+  .sport-container .sport-right .exp{
+    font-size: 12px;
+    top: 12px;
+  }
+  .cd-multi-steps{
+    margin:0;
+  }
+  .info-container .form-container .step-title {
+    margin-bottom: 10px;
+  }
+  .cd-multi-steps li > * {
+    display: inline-block;
+    font-size: 1.2rem;
+  }
+  .config .day-box .day-disponibility .disponibility{
+    font-size: 9.4px;
+    padding:2px;
+  }
+  .config .day-box .day-text{
+    font-size:13px;
+  }
+  .config .day-box {
+    height: 44px;
   }
 }

@@ -7,7 +7,7 @@
     <div class="right-box">
       <% sport.users.where(id: @users.pluck(:id)).limit(5).each do |user| %>
         <div class="user-box <% if @users_selected.present? %> <% unless @users_selected.include?(user.id.to_s)%> opacity <%else%> selected <%end%> <% else %> opacity <% end %>" value="<%= user.id %>">    
-          <img class="img-icon" src='<%= image_path("users/boy-icon.png") if user.gender == 0 %><%= image_path("users/girl-icon.png") if user.gender == 1 %>' width="30px" title="<%= user.name %>"> 
+          <%= image_tag user.image, id: 'image-user', class: 'img-icon'%>
           <div class="text user"><h6><%= user.name.split[0] %></h6></div>
           <img class="user-selected-icon" src="<%= image_path('users/user-icon.png') %>" value="<%= user.id %>"/>
         </div>

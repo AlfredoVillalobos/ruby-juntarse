@@ -14,9 +14,11 @@
   </div>
   <div class="line-separation"></div>
   <br>
-  <button id="link-step3" class='btn btn-small btn-block btn-block btn-login' >
-    Siguiente
-  </button>
+  <% if @action=="edit_profile" %> 
+    <button id="link-step3" class='btn btn-small btn-block btn-block btn-login'>Guardar</button>
+  <% else %>
+    <button id="link-step3" class='btn btn-small btn-block btn-block btn-login'>Siguiente</button>
+  <% end %>
 </div>
 <script>
   $('.sex').click(function(){
@@ -30,20 +32,15 @@
     else{
       $.ajax({
         type: "POST",
-        url: '<%= choose_gender_and_age_aditional_data_path(current_user.id) %>',
+        url: '<%= choose_gender_and_age_aditional_data_path %>',
         data: { age: age,
-                gender: gender
+                gender: gender,
+                action_sender: '<%= @action %>'
               },
-        dataType: "script",
-        }).done(function(data){
-          console.log('llegué')
+        dataType: "script"
       });
     }    
   });
 
-  function sliderChange(e){
-    $('.dinamic-age').html(e)
-  }
-
-    
+  function sliderChange(e){$('.dinamic-age').html(e)}
 </script>

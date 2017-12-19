@@ -1,0 +1,57 @@
+<h6 class="title user-invitation">Editar Perfil</h6>
+<div class="line-separation"></div>
+<div class="user-info">
+  <div class="image-box">
+    <%= image_tag @user.image, size: '200x200', id: 'image-user', class: 'img-user' %>
+    <%= form_with(model: @a, local: true) do |form|%>
+      <label for="user_image" class="edit-image"><img src="<%= image_path('edit-pencil.png')%>" alt=""></label>
+      <%= form.file_field :image, id: :user_image %>
+    <% end %>
+  </div>
+  <div class="item">
+    <span class="data-info-label">Nombre:</span>
+    <h6 class="data-info-content">
+      <%= @user.name %>
+    </h6>
+  </div>
+  <div class="item">
+    <span class="data-info-label">Edad:</span>
+    <h6 class="data-info-content">
+      <%= @user.age %>
+    </h6>
+  </div>
+  <div class="item">
+    <span class="data-info-label">Sexo:</span>
+    <h6 class="data-info-content">
+      <%= @user.gender.zero? ? "Hombre" : "Mujer" %>
+    </h6>
+  </div>
+  <div class="item">
+    <span class="data-info-label">Has invitado:</span>
+    <h6 class="data-info-content">
+      <%= @user.invitations_from.count == 1 ? "#{@user.invitations_from.count} vez" : "#{@user.invitations_from.count} veces" %>
+    </h6>
+  </div>
+  <div class="item">
+      <span class="data-info-label">Has sido invitado:</span>
+      <h6 class="data-info-content">
+        <%= @user.invitations_to.count == 1 ? "#{@user.invitations_to.count} vez" : "#{@user.invitations_to.count} veces" %>
+      </h6>
+  </div>
+</div>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#image-user').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#user_image").change(function(){
+    readURL(this);
+    $('form').submit();
+  });
+</script>

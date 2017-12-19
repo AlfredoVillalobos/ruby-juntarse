@@ -1,8 +1,10 @@
+# controlador general de las vistas
 class PagesController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   def index
     if current_user.present?
       return redirect_to dashboard_pages_path if current_user.config?
+      return redirect_to steps_aditional_data_path unless current_user.config?
     end
   end
 
@@ -60,5 +62,17 @@ class PagesController < ApplicationController
                           .distance_between(user_position,
                                             user_invitation_position,
                                             options = { units: :km })
+  end
+
+  def edit_profile
+    if request.post?
+      current_user.image = params['image'] if params['image'].present?
+      current_user.save
+    end
+    @sports = Sport.left_outer_joins(:user_sports).distinct
+                    .select('sports.*, user_sports.expertice').group('id')
+    @user_sport = UserSport.where(user_id: current_user.id)
+    @action = 'edit_profile'
+    @user = current_user
   end
 end

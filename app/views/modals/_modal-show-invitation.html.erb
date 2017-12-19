@@ -8,7 +8,7 @@
         <div class="modal-body resize-modal">
           <div class="user-response modal-middle">
             <div class="left">
-              <img class="img-icon" src='<%= image_path("users/boy-icon.png") if @invitation.from.gender == 0 %><%= image_path("users/girl-icon.png") if @invitation.from.gender == 1 %>' width="30px" title="<%= @invitation.from.name %>"> 
+              <%= image_tag user.image, id: 'image-user', class: 'img-icon'%>
               <div class="text user"><h6><%= @invitation.from.name.split[0] %></h6></div>
             </div>
             <div class="right">

@@ -11,7 +11,7 @@
             <div class="user-selected-box modal-middle" data-user="<%= user.id %>">
               <span class="delete" title="eliminar de la selección">X</span>
               <div class="left">
-                <img class="img-icon" src='<%= image_path("users/boy-icon.png") if user.gender == 0 %><%= image_path("users/girl-icon.png") if user.gender == 1 %>' width="30px" title="<%= user.name %>"> 
+                <%= image_tag user.image, id: 'image-user', class: 'img-icon'%>
                 <div class="text user"><h6><%= user.name.split[0] %></h6></div>
               </div>
               <div class="right">

@@ -5,6 +5,20 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# --------------- my own gems --------------  #
+gem 'cancancan'
+gem 'carrierwave'
+gem 'devise'
+gem 'faker'
+gem 'mini_magick'
+# geolocation
+gem 'geocoder'
+gem 'gmaps4rails'
+
+gem 'hamburgers'
+# gem 'nouislider-rails', '~> 7.0', '>= 7.0.2'
+gem 'omniauth-facebook'
+# --------------- my own gems --------------  #
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -32,19 +46,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-# my own gems
-gem 'cancancan'
-gem 'devise'
-gem 'faker'
-# geolocation
-gem 'geocoder'
-gem 'gmaps4rails'
-
-gem 'hamburgers'
-# gem 'nouislider-rails', '~> 7.0', '>= 7.0.2'
-gem 'omniauth-facebook'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

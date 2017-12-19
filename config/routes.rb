@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get 'invitations'
       post 'invitations'
       post 'searched_users'
+      get 'edit_profile'
+      post 'edit_profile'
     end
   end
   resources :geocoder do
@@ -33,13 +35,10 @@ Rails.application.routes.draw do
 
   resources :aditional_data do
     collection do
-      get 'steps/:id', :action => 'steps', :as  => 'steps'
-      post 'choose_sports/:id', :action => 'choose_sports',
-                                :as  => 'choose_sports'
-      post 'choose_gender_and_age/:id', :action => 'choose_gender_and_age',
-                                        :as  => 'choose_gender_and_age'
-      post 'chose_disponibility/:id', :action => 'chose_disponibility',
-                                      :as  => 'chose_disponibility'
+      get 'steps'
+      post 'choose_sports'
+      post 'choose_gender_and_age'
+      post 'choose_disponibility'
     end
   end
 

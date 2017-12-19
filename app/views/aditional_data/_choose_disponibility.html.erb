@@ -4,8 +4,8 @@
     <div class="day-text">Lunes</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 1).present? %>
-          <% if User.first.disponibilities.where(day: 1)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 1).present? %>
+          <% if current_user.disponibilities.where(day: 1)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -15,8 +15,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 1).present? %>
-          <% if User.first.disponibilities.where(day: 1)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 1).present? %>
+          <% if current_user.disponibilities.where(day: 1)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -25,8 +25,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 1).present? %>
-          <% if User.first.disponibilities.where(day: 1)[0].night %> 
+        <% if current_user.disponibilities.where(day: 1).present? %>
+          <% if current_user.disponibilities.where(day: 1)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -40,8 +40,8 @@
     <div class="day-text">Martes</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 2).present? %>
-          <% if User.first.disponibilities.where(day: 2)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 2).present? %>
+          <% if current_user.disponibilities.where(day: 2)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -51,8 +51,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 2).present? %>
-          <% if User.first.disponibilities.where(day: 2)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 2).present? %>
+          <% if current_user.disponibilities.where(day: 2)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -61,8 +61,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 2).present? %>
-          <% if User.first.disponibilities.where(day: 2)[0].night %> 
+        <% if current_user.disponibilities.where(day: 2).present? %>
+          <% if current_user.disponibilities.where(day: 2)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -76,8 +76,8 @@
     <div class="day-text">Miércoles</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 3).present? %>
-          <% if User.first.disponibilities.where(day: 3)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 3).present? %>
+          <% if current_user.disponibilities.where(day: 3)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -87,8 +87,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 3).present? %>
-          <% if User.first.disponibilities.where(day: 3)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 3).present? %>
+          <% if current_user.disponibilities.where(day: 3)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -97,8 +97,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 3).present? %>
-          <% if User.first.disponibilities.where(day: 3)[0].night %> 
+        <% if current_user.disponibilities.where(day: 3).present? %>
+          <% if current_user.disponibilities.where(day: 3)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -112,8 +112,8 @@
     <div class="day-text">Jueves</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 4).present? %>
-          <% if User.first.disponibilities.where(day: 4)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 4).present? %>
+          <% if current_user.disponibilities.where(day: 4)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -123,8 +123,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 4).present? %>
-          <% if User.first.disponibilities.where(day: 4)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 4).present? %>
+          <% if current_user.disponibilities.where(day: 4)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -133,8 +133,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 4).present? %>
-          <% if User.first.disponibilities.where(day: 4)[0].night %> 
+        <% if current_user.disponibilities.where(day: 4).present? %>
+          <% if current_user.disponibilities.where(day: 4)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -148,8 +148,8 @@
     <div class="day-text">Viernes</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 5).present? %>
-          <% if User.first.disponibilities.where(day: 5)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 5).present? %>
+          <% if current_user.disponibilities.where(day: 5)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -159,8 +159,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 5).present? %>
-          <% if User.first.disponibilities.where(day: 5)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 5).present? %>
+          <% if current_user.disponibilities.where(day: 5)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -169,8 +169,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 5).present? %>
-          <% if User.first.disponibilities.where(day: 5)[0].night %> 
+        <% if current_user.disponibilities.where(day: 5).present? %>
+          <% if current_user.disponibilities.where(day: 5)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -184,8 +184,8 @@
     <div class="day-text">Sábado</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 6).present? %>
-          <% if User.first.disponibilities.where(day: 6)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 6).present? %>
+          <% if current_user.disponibilities.where(day: 6)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -195,8 +195,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 6).present? %>
-          <% if User.first.disponibilities.where(day: 6)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 6).present? %>
+          <% if current_user.disponibilities.where(day: 6)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -205,8 +205,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 6).present? %>
-          <% if User.first.disponibilities.where(day: 6)[0].night %> 
+        <% if current_user.disponibilities.where(day: 6).present? %>
+          <% if current_user.disponibilities.where(day: 6)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -220,8 +220,8 @@
     <div class="day-text">Domingo</div>
     <div class="day-disponibility">
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 7).present? %>
-          <% if User.first.disponibilities.where(day: 7)[0].morning %> 
+        <% if current_user.disponibilities.where(day: 7).present? %>
+          <% if current_user.disponibilities.where(day: 7)[0].morning %> 
             selected 
           <% end %>
         <% end %>
@@ -231,8 +231,8 @@
         <span class="sub-title">(6 a 12 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 7).present? %>
-          <% if User.first.disponibilities.where(day: 7)[0].afternoon %> 
+        <% if current_user.disponibilities.where(day: 7).present? %>
+          <% if current_user.disponibilities.where(day: 7)[0].afternoon %> 
             selected 
           <% end %>
         <% end %>
@@ -241,8 +241,8 @@
         <span class="sub-title">(12 a 18 hrs)</span>
       </div>
       <div class="disponibility 
-        <% if User.first.disponibilities.where(day: 7).present? %>
-          <% if User.first.disponibilities.where(day: 7)[0].night %> 
+        <% if current_user.disponibilities.where(day: 7).present? %>
+          <% if current_user.disponibilities.where(day: 7)[0].night %> 
             selected 
           <% end %>
         <% end %>
@@ -254,9 +254,11 @@
   </div>
   <div class="line-separation"></div>
   <br>
-  <button id="link-end" class='btn btn-small btn-block btn-block btn-login'>
-    Siguiente
-  </button>
+  <% if @action=="edit_profile" %> 
+    <button id="link-end" class='btn btn-small btn-block btn-block btn-login'>Guardar</button>
+  <% else %>
+    <button id="link-end" class='btn btn-small btn-block btn-block btn-login'>Siguiente</button>
+  <% end %>
 </div>
 
 <script>
@@ -283,8 +285,8 @@
     }else{
       $.ajax({
         type: "POST",
-        url: '<%= chose_disponibility_aditional_data_path(current_user.id) %>',
-        data: { disponibilities: disponibilities },
+        url: '<%= choose_disponibility_aditional_data_path %>',
+        data: { disponibilities: disponibilities, action_sender: '<%= @action %>'},
         dataType: "script",
         }).done(function(data){
           console.log('paso 3 -listo')

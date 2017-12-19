@@ -1,0 +1,30 @@
+.user-info{
+
+  .edit-image {
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 24px;
+
+  }
+  #user_image{
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+  .image-box{
+    text-align: center;
+    position: relative;
+    margin-bottom:20px;
+  }
+  .item{
+    margin:10px;
+  }
+  
+
+
+
+}
+
+
+

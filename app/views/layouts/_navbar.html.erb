@@ -1,12 +1,7 @@
 <nav class="nav-bar wrapper bgkWhite">
-  <div class="central" style="padding-left: 12px">
+  <div class="central">
     <div class="logo col">
-        <a href="<%= dashboard_pages_path %>">  <img src="<%= image_path('logo.png') %>"  style="width:180px; margin-top:30px;"alt=""></a>
-    </div>
-    <div class="col6 col">
-      <div style="position: relative; margin-left: 12px">
-        
-      </div>
+      <a href="<%= dashboard_pages_path %>">  <img src="<%= image_path('logo.png') %>" class="logo-image" alt=""></a>
     </div>
     <div class="col1 col">
       <div class="contBlock event">
@@ -27,7 +22,7 @@
           </button>
           <div class="hamburguer-perfil">
             <ul>
-              <li>Editar Perfil</li>
+              <a href="<%= edit_profile_pages_path %>"><li>Editar Perfil</li></a>
               <a href="<%= destroy_user_session_path %>" data-method="delete"><li>Cerrar Sesión</li></a>
             </ul>
           </div>
