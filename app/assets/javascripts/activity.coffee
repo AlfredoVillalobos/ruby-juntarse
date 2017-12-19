@@ -20,8 +20,8 @@ $(document).on "turbolinks:load", ->
           sport: $('#product-modal').data("sport")
         dataType: 'script'
         success: (z) ->
+          user = $('.user-selected-box').data("user")
           $('.modal').remove()
           $('.modal-backdrop').remove()
-          user = $('.user-selected-box').data("user")
           App.activity.send_event(user)
     return

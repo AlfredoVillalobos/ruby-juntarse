@@ -174,11 +174,14 @@ body::after {
     height: 100%;
     float: left;
   }
+  .logo {
+    min-width: 180px;
+  }
   .col1 {
     width: 10%;
   }
   .col6 {
-    width: 70%;
+    width: 63%;
   }
   .contBlock.event{
     padding-right: 12px;

@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171213215309) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "invitation_id"
-    t.boolean "viewed"
+    t.boolean "viewed", default: false
     t.index ["invitation_id"], name: "index_events_on_invitation_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end

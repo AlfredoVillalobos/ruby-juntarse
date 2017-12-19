@@ -10,6 +10,9 @@
 User.destroy_all
 Sport.destroy_all
 UserSport.destroy_all
+Invitation.destroy_all
+Comment.destroy_all
+Event.destroy_all
 
 sports = ['Fútbol',
           'Tenis',
@@ -21,6 +24,8 @@ sports_image = ['football.png',
                 'ping-pong.png',
                 'bike.png',
                 'running.png']
+
+user_comments = ['']
 sports.length.times do |i|
   Sport.create(name: sports[i],
                image: sports_image[i],
@@ -47,3 +52,16 @@ end
 end
 
 UserSport.dedupe
+
+comment_contents = ['llega a la hora',
+                    'no paga su parte después del partido',
+                    'Se portó súper bien, nos llev+ó en auto',
+                    'va a todas siempre....',
+                    'te pasaste compadre.. estuvo bueno el tenis',
+                    'demasiado bueno en ping pong, debería ser profesional',
+                    'un abrazo, tengo una nueva amiga para salir a correr' ,
+                    'corrimos 1 hora, y no se cansó' ]
+
+User.all.each do |user|
+  Comment.create(user_id: user.id, from: User.where.not(id: Comment.all.pluck(:id)).pluck(:id).sample, content: comment_contents.sample)  
+end

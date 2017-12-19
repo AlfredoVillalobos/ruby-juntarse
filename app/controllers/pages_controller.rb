@@ -49,9 +49,9 @@ class PagesController < ApplicationController
   end
 
   def invitations
-    @invitations = current_user.invitations_to.order(created_at: :desc)
-    @invitation = current_user.invitations_to.find(params['invitation_id']) if params['invitation_id'].present?    
-    @invitation = current_user.invitations_to.find(@invitations.first.id) unless params['invitation_id'].present?
+    @invitations = Invitation.where(to: current_user).or(Invitation.where(from: current_user)).order(created_at: :desc)
+    @invitation = Invitation.find(params['invitation_id']) if params['invitation_id'].present?    
+    @invitation = Invitation.find(@invitations.first.id) unless params['invitation_id'].present?
     @invitation.event.viewed = true
     @invitation.event.save
     user_position = [current_user.latitude, current_user.longitude]

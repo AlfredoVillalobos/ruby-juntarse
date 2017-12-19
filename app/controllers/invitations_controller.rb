@@ -1,7 +1,7 @@
 # invitaciones
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation, only: %i[show_post response_invitation]
+  before_action :set_invitation, only: %i[show_post]
   def invite_users
     users = params['users']
     @sport = params['sport']
@@ -18,6 +18,7 @@ class InvitationsController < ApplicationController
   def show_post() end
 
   def response_invitation
+    @invitation = Invitation.find(params['invitation_id'])
     @invitation.has_response = true
     @invitation.event.viewed = true
     @invitation.event.save
@@ -25,8 +26,8 @@ class InvitationsController < ApplicationController
     Response.create(invitation: @invitation, content: params['content'],
                     response: params['response'])
     respond_to do |format|
-      events = Event.count_unviewed_events(current_user)
-      format.json { render json: events }
+      Event.create!(message: "Han respondido a tu invitación", user: @invitation.from, invitation: @invitation)
+      format.json { render json: @invitation.from_id }
     end
   end
 

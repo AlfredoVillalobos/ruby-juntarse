@@ -9,7 +9,7 @@ class ActivityChannel < ApplicationCable::Channel
   end
 
   def send_event(data)
-    @user = User.find(data['user'])
-    EventBroadcastJob.perform_later(@user.id, @user.events.count)
+    @usr = User.find(data['user'])
+    EventBroadcastJob.perform_later(@usr.id, Event.count_unviewed_events(@usr))
   end
 end

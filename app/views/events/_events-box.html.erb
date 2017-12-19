@@ -13,10 +13,10 @@
         </li>
       <% end %>
     <% else %>
-      <li class="event-message event"><h6>No tiene nuevas invitaciones</h6></li>
+      <li class="event-message event"><h6>No tiene nuevas notificaciones</h6></li>
     <% end %>
-    <% if current_user.invitations_to.count > 0 %>
-      <li class="event-message"> <a href="<%= invitations_pages_path %>"> <h6>Ver todas las invitaciones</h6></a></li>
+    <% if current_user.invitations_to.count > 0 || current_user.invitations_from.count > 0  %>
+      <li class="event-message"> <a href="<%= invitations_pages_path %>"> <h6>Ver todas las notificaciones</h6></a></li>
     <% end %>
   </ul>
   <script>

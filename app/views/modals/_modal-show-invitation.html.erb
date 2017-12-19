@@ -60,8 +60,8 @@
           $('.modal').remove()
           $('.modal-backdrop').remove()
           data = { user_id : <%= current_user.id %>,
-                    events : events
-                  }
+                   events  : events
+                 }
           App.activity.received(data)
         }
       });    
