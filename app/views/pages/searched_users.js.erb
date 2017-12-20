@@ -1,1 +1,5 @@
 $('.searched-users').html("<%= j render 'user-sports', users: @users %>")
+$('.left-sidebar').fadeOut();
+setTimeout(function(){
+  $('.main').fadeIn();    
+},400)    

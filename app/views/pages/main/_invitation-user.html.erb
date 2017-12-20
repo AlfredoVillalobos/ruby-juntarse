@@ -1,14 +1,14 @@
 <div class="up">
-  <div class="left">
+  <div class="left invitation">
     <div>
-        <% if @invitation.from == current_user %>
-          <%= image_tag @invitation.to.image, id: 'image-user', class: 'img-icon invitation', title: @invitation.to.name %>
-        <% else %>
-          <%= image_tag @invitation.from.image, id: 'image-user', class: 'img-icon invitation', title: @invitation.from.name %>
-        <% end %>
+      <% if @invitation.from == current_user %>
+        <%= image_tag @invitation.to.image, id: 'image-user', class: 'img-icon invitation', title: @invitation.to.name %>
+      <% else %>
+        <%= image_tag @invitation.from.image, id: 'image-user', class: 'img-icon invitation', title: @invitation.from.name %>
+      <% end %>
     </div>
   </div>
-  <div class="right">
+  <div class="right invitation">
     <div class="user-from-data">
       <div class="item">
         <span class="data-info-label">Nombre:</span>
@@ -133,4 +133,17 @@
       }
     });
   });
+</script>
+<script>
+document.addEventListener("turbolinks:load", function(){
+  const mq = window.matchMedia( "(max-width: 500px)" );
+  left = $('.left.invitation')
+  right = $('.right.invitation')
+  if (mq.matches) {
+    left.remove()
+    right.remove()
+    $('.up').append(right)
+    $('.up').append(left)
+  }
+})
 </script>

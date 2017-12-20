@@ -1,8 +1,19 @@
 <div class="main-container">
+  
   <nav class="left-sidebar">
     <%= render 'pages/left-sidebar/dashboard' %>      
   </nav>
   <div class="main">
+    <img src="<%= image_path('search-icon.png') %>" class="search-icon" alt="">
     <%= render 'pages/main/dashboard' %>
   </div>
 </div>
+
+<script>
+  $('.search-icon').click(function(){
+    $('.main').fadeOut();
+    setTimeout(function(){
+      $('.left-sidebar').fadeIn();    
+    },400)    
+  })
+</script>
