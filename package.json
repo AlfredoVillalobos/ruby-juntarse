@@ -2,9 +2,14 @@
   "name": "juntarse",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "^3.2.0",
     "bootstrap": "^3.3.7",
+    "coffeescript": "1.12.7",
     "jquery": "^3.2.1",
     "nouislider": "^10.1.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.7"
   }
 }

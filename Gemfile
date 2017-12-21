@@ -11,7 +11,7 @@ gem 'carrierwave'
 gem 'devise'
 gem 'faker', group: :production
 gem 'mini_magick'
-gem 'webpacker'
+
 # geolocation
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -51,6 +51,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'webpacker', '~> 3.0'
 
 
 
