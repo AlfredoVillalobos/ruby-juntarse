@@ -11,6 +11,7 @@ gem 'carrierwave'
 gem 'devise'
 gem 'faker', group: :production
 gem 'mini_magick'
+gem 'webpacker'
 # geolocation
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -47,6 +48,10 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
