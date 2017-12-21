@@ -1,4 +1,4 @@
-<h6 class="title user-invitation"><%= @invitation.from == current_user ? "Invitación hecha" : "Invitación recibida" %></h6>
+<h6 class="title user-invitation"><%= @invitation.from == current_user ? "Invitación hecha a" : "Invitación recibida de" %></h6>
 <div class="line-separation"></div>
 <div class="user-invitation">
   <%= render 'pages/main/invitation-user' %>

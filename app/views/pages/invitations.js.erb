@@ -1,2 +1,16 @@
 $('.user-invitation').html("<%= j render 'pages/main/invitation-user', invitation: @invitation, invitations: @invitations, distance_from_user: @distance_from_user%>")
 $('.title.user-invitation').html('<%= @invitation.from == current_user ? "Invitación hecha" : "Invitación recibida" %>')
+
+mq_ = window.matchMedia( "(max-width: 500px)" );
+left = $('.left.invitation')
+right = $('.right.invitation')
+if (mq_.matches) {
+  $('.left-sidebar').fadeOut();
+  setTimeout(function(){
+    $('.main').fadeIn();    
+  },400)    
+  left.remove()
+  right.remove()
+  $('.up').append(right)
+  $('.up').append(left)
+}

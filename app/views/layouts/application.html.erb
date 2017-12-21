@@ -12,13 +12,14 @@
   </head>
 
   <body>
-
     <%= render 'layouts/navbar' if current_user.present?%>
     <%= yield %> 
     <script>
       var viz_events = false
       var viz_hamburguer = false
       $('.hamburger').click(function(){
+        $('.last-events').fadeOut()
+        $('.events-container').removeClass("active");
         $('.hamburguer-perfil').fadeIn(function(){
           viz_hamburguer = true;
         })

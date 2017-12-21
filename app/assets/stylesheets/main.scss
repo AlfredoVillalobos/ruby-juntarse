@@ -4,6 +4,10 @@
   border-radius: 20px;
   background-color: white;
   border: 1px solid #DDDDDD;
+  height: 100%;
+  .search-icon, .invitations-icon{
+    display:none;
+  }
 
   .title{
     text-align: center;
@@ -47,6 +51,7 @@
         top: 3px;
         left: 14px;
         position: absolute;
+        border-radius: 50%;
       }
       .user-selected-icon {
         display: none;

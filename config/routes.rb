@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     collection do
       post 'invite_users'
     end
-    post 'show_post'
+    post 'show_invitation'
+    post 'show_response'
     post 'response_invitation'
   end
   resources :pages do

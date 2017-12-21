@@ -1,12 +1,14 @@
 <div class="main-container">
   <nav class="left-sidebar">
-    <%= render 'pages/left-sidebar/invitations' %>      
+    <%= render 'pages/left-sidebar/invitations' %>
   </nav>
   <div class="main">
+    <img src="<%= image_path('invitations-icon.png') %>" class="invitations-icon" alt="">
     <%= render 'pages/main/invitations' %>
   </div>
 </div>
 <script>
+  document.title = "Juntarse | Invitaciones"
   $('.invitation-box').click(function(){
     invitation_id = $(this).data("invitation-id")
     $.ajax({
@@ -15,5 +17,13 @@
       data: {invitation_id: invitation_id},
       dataType: "script",
     });
+  })  
+</script>
+<script>
+  $('.invitations-icon').click(function(){
+    $('.main').fadeOut();
+    setTimeout(function(){
+      $('.left-sidebar').fadeIn();
+    },400)
   })
 </script>

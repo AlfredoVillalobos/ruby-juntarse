@@ -1,5 +1,4 @@
-<div class="main-container">
-  
+<div class="main-container">  
   <nav class="left-sidebar">
     <%= render 'pages/left-sidebar/dashboard' %>      
   </nav>
@@ -8,12 +7,31 @@
     <%= render 'pages/main/dashboard' %>
   </div>
 </div>
-
 <script>
+  document.title = "Juntarse | Deportistas cerca"
   $('.search-icon').click(function(){
     $('.main').fadeOut();
     setTimeout(function(){
       $('.left-sidebar').fadeIn();    
     },400)    
+  })
+
+</script>
+<script>
+  document.addEventListener("turbolinks:load", function(){
+    if (matchMedia) {
+      console.log("asdasdad")
+      mq = window.matchMedia("(max-width: 500px)");
+      mq.addListener(WidthChange);
+      WidthChange(mq);
+    }
+    function WidthChange(mq) {
+      if (!mq.matches) {
+        $('.left-sidebar').fadeIn();
+        $('.main').fadeIn();
+      }else{
+        $('.left-sidebar').fadeOut();
+      }
+    }
   })
 </script>

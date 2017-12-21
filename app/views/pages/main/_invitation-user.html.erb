@@ -135,15 +135,27 @@
   });
 </script>
 <script>
-document.addEventListener("turbolinks:load", function(){
-  const mq = window.matchMedia( "(max-width: 500px)" );
-  left = $('.left.invitation')
-  right = $('.right.invitation')
-  if (mq.matches) {
-    left.remove()
-    right.remove()
-    $('.up').append(right)
-    $('.up').append(left)
-  }
-})
+  document.addEventListener("turbolinks:load", function(){
+    if (matchMedia) {
+      mq = window.matchMedia("(max-width: 500px)");
+      mq.addListener(WidthChange);
+      WidthChange(mq);
+    }
+    function WidthChange(mq) {
+      left = $('.left.invitation')
+      right = $('.right.invitation')
+      if (mq.matches) {
+        left.remove()
+        right.remove()
+        $('.up').append(right)
+        $('.up').append(left)
+      }else{
+        left.remove()
+        right.remove()
+        $('.up').append(left)
+        $('.up').append(right)
+        $('.left-sidebar').fadeIn();
+      }
+    }
+  })
 </script>

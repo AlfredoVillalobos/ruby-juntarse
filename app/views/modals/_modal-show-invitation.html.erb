@@ -8,7 +8,7 @@
         <div class="modal-body resize-modal">
           <div class="user-response modal-middle">
             <div class="left">
-              <%= image_tag user.image, id: 'image-user', class: 'img-icon'%>
+              <%= image_tag @invitation.from.image, id: 'image-user', class: 'img-icon'%>
               <div class="text user"><h6><%= @invitation.from.name.split[0] %></h6></div>
             </div>
             <div class="right">
@@ -44,27 +44,39 @@
     </div>
   </div>
   <script>
-    $('.link-response-invitation').click(function(){
+    $('.link-response-invitation').click(function () {
       invitation = $(this).parent().data("invitation-id");
       response = $(this).data("value")
+      $('.invitation-box[data-invitation-id="' + invitation + '"]').addClass("response")
+      $('.invitation-box[data-invitation-id="' + invitation + '"]').removeClass("no-response")
       $.ajax({
         type: "post",
-        url: "/invitations/response_invitation/"+invitation,
+        url: "/invitations/" + invitation + "/response_invitation",
         data: {
           response: response,
           content: $('.content.response_').val()
         },
         dataType: "json",
-        success: function (events) {
+        success: function (user) {
+          App.activity.send_event(user)
+          data = {
+            user_id: <%= current_user.id %>,
+            events: <%= Event.count_unviewed_events(current_user) %>
+          }
+          App.activity.received(data)          
           $('.modal').fadeOut()
           $('.modal').remove()
           $('.modal-backdrop').remove()
-          data = { user_id : <%= current_user.id %>,
-                   events  : events
-                 }
-          App.activity.received(data)
+          setTimeout(function(){
+            $.ajax({
+              type: "post",
+              url: "<%= invitations_pages_path%>",
+              data: { invitation_id: invitation },
+              dataType: "script",
+            });
+          },1000)          
         }
-      });    
+      });
     });
   </script>
 </div>

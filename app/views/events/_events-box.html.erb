@@ -2,27 +2,41 @@
   <ul>
     <% if @events.count > 0 %>
       <% @events.each do |event| %>
-        <li class="event-message event" data-invitation-id="<%= event.invitation.id %>">
+        <li class="event-message event <% if event.invitation.from == current_user %>send<% else %>received<% end %>" data-invitation-id="<%= event.invitation.id %>" data-event-id="<%= event.id %>">
           <div class="message-icon">
             <img src='<%= image_path("sports/#{event.invitation.sport.image}") %>' alt="" width="40px">
           </div>
           <div class="message-text">
             <span class="text"><%= event.message %> </span>
-            <span class="from"><%= event.invitation.from.name %> </span>    
-          </div>      
+            <span class="from"><%= event.invitation.from.name %> </span>
+          </div>
         </li>
       <% end %>
     <% else %>
       <li class="event-message event"><h6>No tiene nuevas notificaciones</h6></li>
     <% end %>
-    <% if current_user.invitations_to.count > 0 || current_user.invitations_from.count > 0  %>
+    <% if current_user.invitations_to.count > 0 || current_user.invitations_from.count > 0 %>
       <li class="event-message"> <a href="<%= invitations_pages_path %>"> <h6>Ver todas las notificaciones</h6></a></li>
     <% end %>
   </ul>
   <script>
-    $('.event-message.event').click(function(){
+    $('.event-message.event.received').click(function(){
+      invitation = $(this).data("invitation-id")
+      event_id = $(this).data("event-id")
+      $('.last-events').fadeOut()
+      $('.events-container').removeClass("active");
+      $.post("/invitations/"+ invitation + "/show_invitation", 
+        { event_id: event_id}
+      )
+    });
+    $('.event-message.event.send').click(function(){
       invitation = $(this).data("invitation-id");
-      $.post("/invitations/show_post/"+invitation ,"script");
+      event_id = $(this).data("event-id")
+      $('.last-events').fadeOut()
+      $('.events-container').removeClass("active");
+      $.post("/invitations/"+ invitation + "/show_response", 
+        { event_id: event_id}
+      )
     });
   </script>
 </div>
