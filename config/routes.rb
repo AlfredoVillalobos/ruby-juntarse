@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :pages do
     collection do
       get 'index'
+      get 'react'
       get 'dashboard'
       post 'dashboard'
       get 'invitations'

@@ -8,6 +8,9 @@ class PagesController < ApplicationController
     end
   end
 
+
+  def react() end
+
   def dashboard
     age_from = params['ageRange'].present? ? params['ageRange'][0].to_i : current_user.age - 7
     age_to = params['ageRange'].present? ? params['ageRange'][1].to_i : current_user.age + 7
@@ -70,7 +73,7 @@ class PagesController < ApplicationController
       current_user.save
     end
     @sports = Sport.left_outer_joins(:user_sports).distinct
-                    .select('sports.*, user_sports.expertice').group('id')
+                   .select('sports.*, user_sports.expertice').group('id')
     @user_sport = UserSport.where(user_id: current_user.id)
     @action = 'edit_profile'
     @user = current_user
