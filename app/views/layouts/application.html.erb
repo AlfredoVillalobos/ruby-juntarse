@@ -15,12 +15,13 @@
     <%= render 'layouts/navbar' if current_user.present?%>
     <%= yield %> 
     <script>
-      var viz_events = false
-      var viz_hamburguer = false
+      var viz_events = false;
+      var viz_hamburguer = false;
       $('.hamburger').click(function(){
+        $(this).toggleClass("is-active");
         $('.last-events').fadeOut()
         $('.events-container').removeClass("active");
-        $('.hamburguer-perfil').fadeIn(function(){
+        $('.hamburger-perfil').fadeIn(function(){
           viz_hamburguer = true;
         })
       })
@@ -35,7 +36,7 @@
         }
       })
       $(document).click(function(){
-        if (viz_hamburguer) {$('.hamburguer-perfil').fadeOut(); viz_hamburguer = false;}
+        if (viz_hamburguer) {$('.hamburger-perfil').fadeOut(); viz_hamburguer = false;}
       })
     </script> 
   </body>

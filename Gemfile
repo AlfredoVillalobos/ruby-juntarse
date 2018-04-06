@@ -9,14 +9,16 @@ end
 gem 'cancancan'
 gem 'carrierwave'
 gem 'devise'
-gem 'faker', group: :production
+gem 'faker'
+gem 'hamburgers'
+gem 'haml'
 gem 'mini_magick'
 
 # geolocation
 gem 'geocoder'
 gem 'gmaps4rails'
 
-gem 'hamburgers'
+
 # gem 'nouislider-rails', '~> 7.0', '>= 7.0.2'
 gem 'omniauth-facebook'
 # --------------- my own gems --------------  #
@@ -51,8 +53,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'webpacker', '~> 3.0'
-
+gem 'webpacker', '~> 3.4'
 
 
 

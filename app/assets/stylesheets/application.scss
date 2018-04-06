@@ -11,7 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  *= require nouislider/distribute/nouislider
- *= require bootstrap/dist/css/bootstrap
  *= require_tree .
  *= require_self
  */
@@ -223,6 +222,7 @@ body::after {
 }
 
 /* ---------------------- hamburguer ------------------------*/
+
 @import "hamburgers";
 
 .hamburger {
@@ -245,7 +245,7 @@ body::after {
   background-color: #5CAF50;
 }
 
-.hamburguer-perfil{
+.hamburger-perfil{
   display: none;
   width: 200px;
   position: absolute;
@@ -268,6 +268,8 @@ body::after {
     background-color:	rgba(255, 224, 130, 1);
   }
 }
+
+
 @media screen and (max-width: 500px) {
   body{
     height: 85vh;
@@ -371,7 +373,7 @@ body::after {
       width:100%;
     }
   }
-  .hamburguer-perfil, .last-events {
+  .hamburger-perfil, .last-events {
     width: 100vw;
     top: 10vh;
   }
