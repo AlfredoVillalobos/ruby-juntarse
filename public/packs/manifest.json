@@ -1,0 +1,16 @@
+{
+  "App.js": "/packs/App-d1d81eb7c3d06e77c9d2.js",
+  "App.js.map": "/packs/App-d1d81eb7c3d06e77c9d2.js.map",
+  "application.js": "/packs/application-05923c3a424487ba18d3.js",
+  "application.js.map": "/packs/application-05923c3a424487ba18d3.js.map",
+  "components/Layout/Layout.js": "/packs/components/Layout/Layout-9ac6973df5d64d984124.js",
+  "components/Layout/Layout.js.map": "/packs/components/Layout/Layout-9ac6973df5d64d984124.js.map",
+  "components/Navigation/Navigation.js": "/packs/components/Navigation/Navigation-6df21901967dcda31186.js",
+  "components/Navigation/Navigation.js.map": "/packs/components/Navigation/Navigation-6df21901967dcda31186.js.map",
+  "containers/Preferences/Preferences.js": "/packs/containers/Preferences/Preferences-d14ef8b55d7968f82ac1.js",
+  "containers/Preferences/Preferences.js.map": "/packs/containers/Preferences/Preferences-d14ef8b55d7968f82ac1.js.map",
+  "hello_react.js": "/packs/hello_react-fc7ec61f92d24c456b5b.js",
+  "hello_react.js.map": "/packs/hello_react-fc7ec61f92d24c456b5b.js.map",
+  "hoc/Aux.js": "/packs/hoc/Aux-e0f2a2751a57aa4ee610.js",
+  "hoc/Aux.js.map": "/packs/hoc/Aux-e0f2a2751a57aa4ee610.js.map"
+}

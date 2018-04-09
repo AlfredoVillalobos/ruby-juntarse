@@ -1,0 +1,29 @@
+
+%nav.nav-bar.wrapper.bgkWhite
+  .central
+    .logo.col
+      %a{href: "#{dashboard_pages_path}" }
+        %img.logo-image{ src: "#{image_path('logo.png')}" }
+    .col1.col
+      .contBlock.event
+        #event.events
+          = render 'events/events-count'
+      .events-container
+    .col1.col
+      .contBlock
+        .navbar-perfil
+          %button.hamburger.hamburger--squeeze.js-hamburger
+            %span.hamburger-box
+              %span.hamburger-inner
+          .hamburger-perfil
+            %ul
+              %a
+                %li
+                  = link_to 'Editar Perfil', edit_profile_pages_path 
+              %a
+                %li
+                  = link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete 
+
+
+
+

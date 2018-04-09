@@ -11,19 +11,33 @@ class AditionalDataController < ApplicationController
     @user_sport = UserSport.where(user_id: current_user.id)
   end
 
+  # Runs a subprocess and applies handlers for stdout and stderr
+  # Params:
+  # +command+:: command line string to be executed by the system
+  # +outhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
+  # +errhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
   def choose_sports
     sports = params['sports']
     UserSport.create_or_update(sports, current_user.id) if sports.present?
-    puts params['action_sender']
     return if params['action_sender'] == 'edit_profile' # edit profile
   end
 
+  # Runs a subprocess and applies handlers for stdout and stderr
+  # Params:
+  # +command+:: command line string to be executed by the system
+  # +outhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
+  # +errhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
   def choose_gender_and_age
     @user = User.find(current_user.id)
     @user.update(gender: params['gender'].to_i, age: params['age'].to_i)
     @action
   end
 
+  # Runs a subprocess and applies handlers for stdout and stderr
+  # Params:
+  # +command+:: command line string to be executed by the system
+  # +outhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
+  # +errhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)
   def choose_disponibility
     add_disponibilities(params['disponibilities']) if params['disponibilities'].present?    
     @disponibilities = current_user.disponibilities

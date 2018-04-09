@@ -6,6 +6,7 @@
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^3.3.7",
     "coffeescript": "1.12.7",
+    "haml-jsx-loader": "^1.0.2",
     "immutability-helper": "^2.6.6",
     "jquery": "^3.2.1",
     "nouislider": "^10.1.0",

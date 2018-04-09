@@ -1,0 +1,20 @@
+I"(function() {
+  App.activity = App.cable.subscriptions.create("ActivityChannel", {
+    connected: function() {},
+    disconnected: function() {},
+    received: function(data) {
+      var active_events;
+      active_events = $("[data-user-id='" + data.user_id + "']");
+      if (active_events.length > 0) {
+        return $("[data-user-id='" + data.user_id + "']").html(data.events);
+      }
+    },
+    send_event: function(user) {
+      return this.perform("send_event", {
+        user: user
+      });
+    }
+  });
+
+}).call(this);
+:ET

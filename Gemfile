@@ -5,14 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# --------------- my own gems --------------  #
-gem 'cancancan'
-gem 'carrierwave'
-gem 'devise'
-gem 'faker'
-gem 'hamburgers'
-gem 'haml'
-gem 'mini_magick'
+
 
 # geolocation
 gem 'geocoder'
@@ -54,7 +47,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'webpacker', '~> 3.4'
-
+gem 'rdoc'
 
 
 group :development, :test do
@@ -77,3 +70,14 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+
+# --------------- my own gems --------------  #
+gem 'cancancan'
+gem 'carrierwave'
+gem 'devise'
+gem 'faker'
+gem 'hamburgers'
+gem 'haml'
+gem 'mini_magick'
