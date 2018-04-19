@@ -17227,3 +17227,45 @@ An unauthorized connection attempt was rejected
 Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
 Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:07:28 -0300
 Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:07:28 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:07:53 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:07:53 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:07:53 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:07:53 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:08:18 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:18 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:18 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:18 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:08:43 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:43 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:43 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:08:43 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:09:09 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:09 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:09 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:09 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:09:34 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:34 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:34 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:09:34 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 22:10:00 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:10:00 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:10:00 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 22:10:00 -0300
