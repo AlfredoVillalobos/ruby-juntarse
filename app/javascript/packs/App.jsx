@@ -24,6 +24,7 @@ const Hello = props => (
   <div>Hello {props.name}!</div>
 )
 
+
 Hello.defaultProps = {
   name: 'David'
 }
@@ -33,8 +34,20 @@ Hello.propTypes = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
+  const node = document.getElementById('sports');
+  const dataSports = JSON.parse(node.getAttribute('data-sports'));
+  const dataLogoImagePath = node.getAttribute('data-logo-image-path');
+  const dataEditProfilePagesPath = node.getAttribute('data-edit-profile-pages-path');
+
+  //console.log(dataLogoImagePath);
+
   ReactDOM.render(
-    <Navigation/>,
+    <Navigation 
+      logo_image_path={dataLogoImagePath}
+      edit_profile_pages_path={dataEditProfilePagesPath}
+    />,
     document.body.appendChild(document.createElement('div'))
   )
 })

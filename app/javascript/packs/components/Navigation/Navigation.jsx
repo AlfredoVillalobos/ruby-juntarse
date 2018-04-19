@@ -1,36 +1,25 @@
 import React from "react";
 import Aux from "../../hoc/Aux";
+import Toolbar from "./Toolbar/Toolbar";
 
-const navigation = () => (
+const navigation = (props) => (
   <Aux>
-    <nav class="nav-bar wrapper bgkWhite">
-      <div class="central">
-        <div class="logo col">
-          <a href="<%= dashboard_pages_path %>">  <img src="<%= image_path('logo.png') %>" class="logo-image" alt=""/></a>
+    <nav className="nav-bar wrapper bgkWhite">
+      <div className="central">
+        <div className="logo col">
+          <a href={props.edit_profile_pages_path}>  <img src={props.logo_image_path} className="logo-image" alt="logo-image"/></a>
         </div>
-        <div class="col1 col">
-          <div class="contBlock event">
-            <div id="events" class="events">
+        <div className="col1 col">
+          <div className="contBlock event">
+            <div id="events" className="events">
             </div>
           </div>
-          <div class="events-container">
+          <div className="events-container">
           </div>
         </div>
-        <div class="col1 col">
-          <div class="contBlock">
-            <div class="navbar-perfil">
-              <button class="hamburger hamburger--squeeze" type="button">
-                <span class="hamburger-box">
-                  <span class="hamburger-inner"></span>
-                </span>
-              </button>
-              <div class="hamburguer-perfil">
-                <ul>
-                  <a href="<%= edit_profile_pages_path %>"><li>Editar Perfil</li></a>
-                  <a href="<%= destroy_user_session_path %>" data-method="delete"><li>Cerrar Sesión</li></a>
-                </ul>
-              </div>
-            </div>
+        <div className="col1 col">
+          <div className="contBlock">
+            <Toolbar/>
           </div>
         </div>
       </div>

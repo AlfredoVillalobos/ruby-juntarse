@@ -73,13 +73,9 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-event_viewed">#event_viewed</a>
-    
     <li ><a href="#method-i-invite_users">#invite_users</a>
     
     <li ><a href="#method-i-response_invitation">#response_invitation</a>
-    
-    <li ><a href="#method-i-set_invitation">#set_invitation</a>
     
     <li ><a href="#method-i-show_invitation">#show_invitation</a>
     
@@ -288,82 +284,6 @@
             <pre><span class="ruby-comment"># File app/controllers/invitations_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show_response</span>
   <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">count_unviewed_events</span>(<span class="ruby-identifier">current_user</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-event_viewed" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">event_viewed</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="event_viewed-source">
-            <pre><span class="ruby-comment"># File app/controllers/invitations_controller.rb, line 49</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">event_viewed</span>
-  <span class="ruby-identifier">e</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:event_id</span>])
-  <span class="ruby-identifier">e</span>.<span class="ruby-identifier">viewed</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-identifier">e</span>.<span class="ruby-identifier">save</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-set_invitation" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">set_invitation</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="set_invitation-source">
-            <pre><span class="ruby-comment"># File app/controllers/invitations_controller.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_invitation</span>
-  <span class="ruby-ivar">@invitation</span> = <span class="ruby-constant">Invitation</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:invitation_id</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           

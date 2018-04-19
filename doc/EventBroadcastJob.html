@@ -73,8 +73,6 @@
     
     <li ><a href="#method-i-perform">#perform</a>
     
-    <li ><a href="#method-i-render_event">#render_event</a>
-    
   </ul>
 </div>
 
@@ -130,55 +128,6 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">perform</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">events</span>)    
   <span class="ruby-constant">ActionCable</span>.<span class="ruby-identifier">server</span>.<span class="ruby-identifier">broadcast</span> <span class="ruby-string">&#39;activity_channel&#39;</span>, {<span class="ruby-value">events:</span> <span class="ruby-identifier">events</span>, 
                                                     <span class="ruby-value">user_id:</span> <span class="ruby-identifier">user_id</span>}
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-render_event" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">render_event</span><span
-            class="method-args">(event, current_user)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="render_event-source">
-            <pre><span class="ruby-comment"># File app/jobs/event_broadcast_job.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_event</span>(<span class="ruby-identifier">event</span>, <span class="ruby-identifier">current_user</span>)
-  <span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>
-                       .<span class="ruby-identifier">render</span>( <span class="ruby-value">partial:</span> <span class="ruby-string">&#39;events/event&#39;</span>,
-                                <span class="ruby-value">locals:</span> {
-                                  <span class="ruby-value">event:</span> <span class="ruby-identifier">event</span> },
-                                <span class="ruby-value">assigns:</span> {
-                                  <span class="ruby-value">current_user:</span> <span class="ruby-identifier">current_user</span>
-                                }
-
-                              )
 <span class="ruby-keyword">end</span></pre>
           </div>
           

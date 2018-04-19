@@ -23,7 +23,7 @@
   <% end %>
 </div>
 <script>
-  var sports = { }
+  
   document.addEventListener("turbolinks:load", function(){
     (function() {
       if (navigator.geolocation){navigator.geolocation.getCurrentPosition(getAddress)}
@@ -41,21 +41,5 @@
       },
       dataType: "script"
     });
-  }
-  
-  $(".img-sport, .name").on('click', function(){
-    sport_img = $(this).parent().parent().find(".img-sport")
-    sport_img.toggleClass("opacity")
-    $(this).parent().parent().find(".name, .exp, .slider-box").toggleClass("hidden")
-  });
-  $("#link-step2").click(function(){
-    $('.img-sport').each(function(){
-      if (!$(this).hasClass('opacity')){
-        sport_expertice = $(this).parent().parent().find(".slider").val()
-        sports[$(this).attr('value')] = sport_expertice
-      }
-    })
-    if (Object.keys(sports).length == 0){alert("Debe seleccionar algún deporte")}
-    else { $.post('<%= choose_sports_aditional_data_path %>', {sports: sports, action_sender: '<%= @action %>'},"script"); }
-  });
+  }  
 </script>

@@ -73,8 +73,6 @@
     
     <li ><a href="#method-i-connect">#connect</a>
     
-    <li ><a href="#method-i-find_verified_user">#find_verified_user</a>
-    
   </ul>
 </div>
 
@@ -133,51 +131,6 @@ actioncable</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">connect</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">current_user</span> = <span class="ruby-identifier">find_verified_user</span>
   <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">add_tags</span> <span class="ruby-string">&#39;ActionCable&#39;</span>, <span class="ruby-node">&quot;User #{current_user.id}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-find_verified_user" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">find_verified_user</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="find_verified_user-source">
-            <pre><span class="ruby-comment"># File app/channels/application_cable/connection.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_verified_user</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span> = <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;warden&#39;</span>].<span class="ruby-identifier">user</span>
-    <span class="ruby-identifier">current_user</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">reject_unauthorized_connection</span>
-  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

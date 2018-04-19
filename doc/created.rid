@@ -1,4 +1,4 @@
-Mon, 09 Apr 2018 11:25:56 -0300
+Mon, 09 Apr 2018 14:06:52 -0300
 app/assets/config/manifest.js	Fri, 06 Apr 2018 10:26:52 -0300
 app/assets/images/edit-pencil.png	Fri, 06 Apr 2018 10:26:52 -0300
 app/assets/images/users/user-tenis.png	Fri, 06 Apr 2018 10:26:52 -0300
@@ -58,14 +58,14 @@ app/assets/javascripts/geocoder.coffee	Fri, 06 Apr 2018 10:26:52 -0300
 app/assets/javascripts/rooms.coffee	Fri, 06 Apr 2018 10:26:52 -0300
 app/assets/javascripts/cable.coffee	Fri, 06 Apr 2018 10:26:52 -0300
 app/uploaders/user_image_uploader.rb	Fri, 06 Apr 2018 10:26:52 -0300
-app/javascript/packs/hoc/Aux.jsx	Fri, 06 Apr 2018 17:43:43 -0300
-app/javascript/packs/application.js	Fri, 06 Apr 2018 15:35:23 -0300
-app/javascript/packs/containers/Preferences/Preferences.jsx	Fri, 06 Apr 2018 16:52:25 -0300
-app/javascript/packs/App.jsx	Fri, 06 Apr 2018 16:26:59 -0300
-app/javascript/packs/hello_react.jsx	Fri, 06 Apr 2018 12:57:54 -0300
-app/javascript/packs/components/Navigation/Navigation.css	Fri, 06 Apr 2018 15:14:19 -0300
-app/javascript/packs/components/Navigation/Navigation.jsx	Fri, 06 Apr 2018 17:54:08 -0300
-app/javascript/packs/components/Layout/Layout.jsx	Fri, 06 Apr 2018 16:45:37 -0300
+app/javascript/packs/hoc/Aux.jsx	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/application.js	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/containers/Preferences/Preferences.jsx	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/App.jsx	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/hello_react.jsx	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/components/Navigation/Navigation.css	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/components/Navigation/Navigation.jsx	Mon, 09 Apr 2018 11:32:26 -0300
+app/javascript/packs/components/Layout/Layout.jsx	Mon, 09 Apr 2018 11:32:26 -0300
 app/controllers/geocoder_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/application_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/users/confirmations_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
@@ -74,11 +74,11 @@ app/controllers/users/passwords_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/users/unlocks_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/users/registrations_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/users/omniauth_callbacks_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
-app/controllers/aditional_data_controller.rb	Mon, 09 Apr 2018 11:21:30 -0300
+app/controllers/aditional_data_controller.rb	Mon, 09 Apr 2018 14:06:48 -0300
 app/controllers/sports_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/controllers/invitations_controller.rb	Fri, 06 Apr 2018 10:26:52 -0300
-app/controllers/events_controller.rb	Mon, 09 Apr 2018 10:25:33 -0300
-app/controllers/pages_controller.rb	Fri, 06 Apr 2018 15:35:23 -0300
+app/controllers/events_controller.rb	Mon, 09 Apr 2018 11:32:26 -0300
+app/controllers/pages_controller.rb	Mon, 09 Apr 2018 11:32:26 -0300
 app/channels/activity_channel.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/channels/room_channel.rb	Fri, 06 Apr 2018 10:26:52 -0300
 app/channels/application_cable/connection.rb	Fri, 06 Apr 2018 10:26:52 -0300
@@ -106,7 +106,7 @@ app/views/pages/dashboard.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/pages/invitations.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/pages/index.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/pages/searched_users.js.erb	Fri, 06 Apr 2018 10:26:52 -0300
-app/views/pages/react.html.erb	Fri, 06 Apr 2018 13:16:57 -0300
+app/views/pages/react.html.erb	Mon, 09 Apr 2018 11:32:26 -0300
 app/views/pages/invitations.js.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/pages/left-sidebar/_invitations.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/pages/left-sidebar/_edit_profile.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
@@ -137,7 +137,7 @@ app/views/sports/_form.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/layouts/mailer.text.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/layouts/application.html.erb	Fri, 06 Apr 2018 12:30:12 -0300
 app/views/layouts/mailer.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
-app/views/layouts/_navbar.html.haml	Fri, 06 Apr 2018 12:30:03 -0300
+app/views/layouts/_navbar.html.haml	Mon, 09 Apr 2018 11:32:26 -0300
 app/views/modals/_modal-show-response.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/modals/_modal-invite.html.erb	Fri, 06 Apr 2018 10:26:52 -0300
 app/views/modals/_modal-show-invitation.html.erb	Fri, 06 Apr 2018 10:26:52 -0300

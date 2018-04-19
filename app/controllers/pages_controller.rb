@@ -1,17 +1,20 @@
 # controlador general de las vistas
 class PagesController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
+  before_action :config_complete?, except: %i[index]
+
   def index
     if current_user.present?
-      return redirect_to dashboard_pages_path if current_user.config?
-      return redirect_to steps_aditional_data_path unless current_user.config?
+      redirect_to dashboard_pages_path if current_user.config?
     end
   end
 
-
-  def react() end
+  def react
+    @sports = Sport.all
+  end
 
   def dashboard
+    redirect_to steps_aditional_data_path unless current_user.config?
     age_from = params['ageRange'].present? ? params['ageRange'][0].to_i : current_user.age - 7
     age_to = params['ageRange'].present? ? params['ageRange'][1].to_i : current_user.age + 7
     km = params['km'].present? ? params['km'].to_i : 20
@@ -55,8 +58,7 @@ class PagesController < ApplicationController
 
   def invitations
     @invitations = Invitation.where(to: current_user).or(Invitation.where(from: current_user)).order(created_at: :desc)
-    @invitation = Invitation.find(params['invitation_id']) if params['invitation_id'].present?    
-    @invitation = Invitation.find(@invitations.first.id) unless params['invitation_id'].present?
+    @invitation = Invitation.find(params['invitation_id']) || Invitation.find(@invitations.first.id)
     @invitation.event.viewed = true
     @invitation.event.save
     user_position = [current_user.latitude, current_user.longitude]
@@ -78,4 +80,11 @@ class PagesController < ApplicationController
     @action = 'edit_profile'
     @user = current_user
   end
+
+  private
+
+  def config_complete?
+    redirect_to steps_aditional_data_path unless current_user.config?
+  end
+
 end

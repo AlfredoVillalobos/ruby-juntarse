@@ -1,0 +1,71 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
+// vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file. JavaScript code in this file should be added after the last require_* statement.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery/dist/jquery
+//= require bootstrap/dist/js/bootstrap
+//= require nouislider/distribute/nouislider
+//= require underscore/underscore
+//= require gmaps/google
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .
+
+document.addEventListener("turbolinks:load", function(){
+
+  // choose sports
+  <% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
+  
+  
+  $(".form-container").on("click", ".img-sport, .name", function(){
+    sport_img = $(this).parent().parent().find(".img-sport")
+    sport_img.toggleClass("opacity")
+    $(this).parent().parent().find(".name, .exp, .slider-box").toggleClass("hidden")
+  });
+  $(".form-container").on("click", "#link-step2", function(){
+    var sports = { }
+    $('.img-sport').each(function(){
+      if (!$(this).hasClass('opacity')){
+        sport_expertice = $(this).parent().parent().find(".slider").val()
+        sports[$(this).attr('value')] = sport_expertice
+      }
+    })
+    if (Object.keys(sports).length == 0){alert("Debe seleccionar algún deporte")}
+    else { $.post("<%= choose_sports_aditional_data_path %>", {sports: sports, action_sender: '<%= @action %>'},"script"); }
+  });
+
+
+
+
+  var viz_events = false;
+  var viz_hamburguer = false;
+  $('.hamburger').click(function(){
+    $(this).toggleClass("is-active");
+    $('.last-events').fadeOut()
+    $('.events-container').removeClass("active");
+    $('.hamburger-perfil').fadeIn(function(){
+      viz_hamburguer = true;
+    })
+  })
+  $('#events').click(function(){     
+    is_active = $('.events-container').hasClass("active")
+    if (!is_active) {
+      $('.events-container').addClass("active");
+      $.post("/events/last_events", "script"); 
+    }else if(is_active){
+      $('.last-events').fadeOut();
+      $('.events-container').removeClass("active");
+    }
+  })
+  $(document).click(function(){
+    if (viz_hamburguer) {$('.hamburger-perfil').fadeOut(); viz_hamburguer = false;}
+  })
+} )

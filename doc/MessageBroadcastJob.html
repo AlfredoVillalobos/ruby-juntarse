@@ -73,8 +73,6 @@
     
     <li ><a href="#method-i-perform">#perform</a>
     
-    <li ><a href="#method-i-render_message">#render_message</a>
-    
   </ul>
 </div>
 
@@ -129,47 +127,6 @@
             <pre><span class="ruby-comment"># File app/jobs/message_broadcast_job.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">perform</span>(<span class="ruby-identifier">message</span>)
   <span class="ruby-constant">ActionCable</span>.<span class="ruby-identifier">server</span>.<span class="ruby-identifier">broadcast</span> <span class="ruby-string">&#39;room_channel&#39;</span>, <span class="ruby-value">message:</span> <span class="ruby-identifier">render_message</span>(<span class="ruby-identifier">message</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Private Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-render_message" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">render_message</span><span
-            class="method-args">(message)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="render_message-source">
-            <pre><span class="ruby-comment"># File app/jobs/message_broadcast_job.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render_message</span>(<span class="ruby-identifier">message</span>)
-  <span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">render</span>(<span class="ruby-value">partial:</span> <span class="ruby-string">&#39;messages/message&#39;</span>, <span class="ruby-value">locals:</span> { <span class="ruby-value">message:</span> <span class="ruby-identifier">message</span>} )
 <span class="ruby-keyword">end</span></pre>
           </div>
           

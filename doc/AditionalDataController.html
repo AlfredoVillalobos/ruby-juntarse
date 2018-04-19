@@ -157,7 +157,7 @@
 
           
           <div class="method-source-code" id="choose_disponibility-source">
-            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">choose_disponibility</span>
   <span class="ruby-identifier">add_disponibilities</span>(<span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;disponibilities&#39;</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;disponibilities&#39;</span>].<span class="ruby-identifier">present?</span>    
   <span class="ruby-ivar">@disponibilities</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">disponibilities</span>
@@ -189,7 +189,8 @@
 
         <div class="method-description">
           
-          <p>Runs a subprocess and applies handlers for stdout and stderr Params:</p>
+          <p>Runs a subprocess and applies handlers for stdout and stderr
+<code>Params</code>:</p>
 <dl class="rdoc-list note-list"><dt><code>command</code>
 <dd>
 <p>command line string to be executed by the system</p>
@@ -207,7 +208,7 @@
 
           
           <div class="method-source-code" id="choose_gender_and_age-source">
-            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">choose_gender_and_age</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
   <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update</span>(<span class="ruby-value">gender:</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;gender&#39;</span>].<span class="ruby-identifier">to_i</span>, <span class="ruby-value">age:</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;age&#39;</span>].<span class="ruby-identifier">to_i</span>)
@@ -236,15 +237,19 @@
 
         <div class="method-description">
           
-          <p>Runs a subprocess and applies handlers for stdout and stderr Params:</p>
-<dl class="rdoc-list note-list"><dt><code>command</code>
+          <p>Runs a subprocess and applies handlers for stdout and stderr</p>
+<dl class="rdoc-list note-list"><dt><code>Author</code>
+<dd>
+<p>Sergio Torres</p>
+</dd><dt><code>Params</code>
+<dt><code>--command</code>
 <dd>
 <p>command line string to be executed by the system</p>
-</dd><dt><code>outhandler</code>
+</dd><dt><code>--outhandler</code>
 <dd>
 <p><code>Proc</code> object that takes a pipe object as first and only param
 (may be nil)</p>
-</dd><dt><code>errhandler</code>
+</dd><dt><code>--errhandler</code>
 <dd>
 <p><code>Proc</code> object that takes a pipe object as first and only param
 (may be nil)</p>
@@ -254,7 +259,7 @@
 
           
           <div class="method-source-code" id="choose_sports-source">
-            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 20</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">choose_sports</span>
     <span class="ruby-identifier">sports</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;sports&#39;</span>]
     <span class="ruby-constant">UserSport</span>.<span class="ruby-identifier">create_or_update</span>(<span class="ruby-identifier">sports</span>, <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">sports</span>.<span class="ruby-identifier">present?</span>
@@ -262,7 +267,7 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Runs a subprocess and applies handlers for stdout and stderr</span>
-  <span class="ruby-comment"># Params:</span>
+  <span class="ruby-comment"># +Params+:</span>
   <span class="ruby-comment"># +command+:: command line string to be executed by the system</span>
   <span class="ruby-comment"># +outhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)</span>
   <span class="ruby-comment"># +errhandler+:: +Proc+ object that takes a pipe object as first and only param (may be nil)</span>
@@ -321,7 +326,7 @@
 
           
           <div class="method-source-code" id="set_action-source">
-            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/controllers/aditional_data_controller.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_action</span>
   <span class="ruby-ivar">@action</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;action_sender&#39;</span>]
 <span class="ruby-keyword">end</span></pre>

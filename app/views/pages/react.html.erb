@@ -1,1 +1,6 @@
-<%= javascript_pack_tag 'App' %>
+<%= javascript_pack_tag 'App', id: 'sports', 
+    data: {
+      sports: @sports.to_json,
+      edit_profile_pages_path: dashboard_pages_path,
+      logo_image_path: image_path('logo.png')
+      } %>
