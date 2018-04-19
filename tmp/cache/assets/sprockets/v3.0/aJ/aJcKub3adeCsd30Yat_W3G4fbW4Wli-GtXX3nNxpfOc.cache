@@ -1,7 +1,0 @@
-I"o(function() {
-  this.App || (this.App = {});
-
-  App.cable = ActionCable.createConsumer();
-
-}).call(this);
-:ET
