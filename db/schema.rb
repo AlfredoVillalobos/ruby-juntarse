@@ -50,32 +50,10 @@ ActiveRecord::Schema.define(version: 20171219164419) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "has_response"
+    t.boolean "has_response", default: false
     t.index ["from_id"], name: "index_invitations_on_from_id"
     t.index ["sport_id"], name: "index_invitations_on_sport_id"
     t.index ["to_id"], name: "index_invitations_on_to_id"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_to_id"
-    t.integer "user_from_id"
-    t.index ["user_from_id"], name: "index_messages_on_user_from_id"
-    t.index ["user_to_id"], name: "index_messages_on_user_to_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer "user_from_id"
-    t.integer "user_to_id"
-    t.integer "sport_id"
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["sport_id"], name: "index_notifications_on_sport_id"
-    t.index ["user_from_id"], name: "index_notifications_on_user_from_id"
-    t.index ["user_to_id"], name: "index_notifications_on_user_to_id"
   end
 
   create_table "responses", force: :cascade do |t|

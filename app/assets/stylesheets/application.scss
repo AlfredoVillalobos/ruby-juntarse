@@ -17,7 +17,7 @@
  */
 
 
-/*  ---------------------------  inicio fonts --------------------------- */ 
+/*  ---------------------------  inicio fonts --------------------------- */
 @font-face {
   font-family: 'Work Sans';
   font-style: normal;
@@ -32,7 +32,7 @@
   src:  font_url("WorkSans/WorkSans-SemiBold.ttf");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
-/*  ---------------------------  inicio fonts --------------------------- */ 
+/*  ---------------------------  inicio fonts --------------------------- */
 
 
 /*  ---------------------------  inicio @key-frames --------------------------- */
@@ -131,7 +131,7 @@ body::after {
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -157,12 +157,12 @@ body::after {
 }
 
 
-/* ---------------------------  nav-bar --------------------------- */ 
+/* ---------------------------  nav-bar --------------------------- */
 .nav-bar{
   background: #F9F9F7;
   height: 100px;
   line-height: 100px;
-  border-bottom: 10px solid #FFE082;  
+  border-bottom: 10px solid #FFE082;
   .central {
     display: block;
     max-width: 1100px;
@@ -170,7 +170,7 @@ body::after {
     height: 100%;
   }
   .logo-image{
-    width:180px; 
+    width:180px;
     margin-top:30px;
   }
   .col{
@@ -213,13 +213,13 @@ body::after {
       -o-transition: all 0.16s cubic-bezier(0, 0, 0.25, 1);
       -ms-transition: all 0.16s linear;
       transition: all 0.16s cubic-bezier(0, 0, 0.25, 1);
-    }  
+    }
     li:hover{
       background-color: #FFE082;
     }
 
   }
-  
+
 }
 
 /* ---------------------- hamburguer ------------------------*/
@@ -235,7 +235,7 @@ body::after {
   margin-top: 40px;
 }
 .hamburger:hover {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .navbar-perfil{
@@ -346,7 +346,7 @@ body::after {
   .config .day-box {
     height: 44px;
   }
-// -------------------------------- dashboard ---------------------------------- // 
+// -------------------------------- dashboard ---------------------------------- //
   .left-sidebar{
     display:none;
     margin: 0 5px;
@@ -382,7 +382,7 @@ body::after {
   .main .users {
     display:block;
   }
-  .main .contact-sender, .main .searched-users {    
+  .main .contact-sender, .main .searched-users {
     width:100%;
   }
   .main .searched-users .sport-box-map .left.box{
@@ -426,7 +426,7 @@ body::after {
   }
 
   // --------------------------------- invitations --------------------------------- //
-  .user-invitation .up {    
+  .user-invitation .up {
     display: block;
   }
   .user-invitation .up .left, .user-invitation .up .right{

@@ -1,0 +1,1731 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (136.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (83.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20171126144901)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171126144901"]]
+  [1m[35m (88.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateSports (20171126151426)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "sports" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "image" varchar, "state" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171126151426"]]
+  [1m[35m (75.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProviderToUser (20171126155646)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" varchar[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171126155646"]]
+  [1m[35m (63.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddNameToUser (20171126155747)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "name" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171126155747"]]
+  [1m[35m (36.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUserSports (20171128033630)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "user_sports" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "sport_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_6aac1d00ef"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_ab60f67ae4"
+FOREIGN KEY ("sport_id")
+  REFERENCES "sports" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_user_sports_on_user_id" ON "user_sports" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_sports_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_sports_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_user_sports_on_sport_id" ON "user_sports" ("sport_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171128033630"]]
+  [1m[35m (69.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddExperticeToUserSport (20171128052142)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "user_sports" ADD "expertice" integer[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171128052142"]]
+  [1m[35m (55.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddGenderAndAgeToUser (20171128170710)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "gender" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "age" integer[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171128170710"]]
+  [1m[35m (50.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateDisponibilities (20171129162339)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "disponibilities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "day" integer, "morning" integer, "afternoon" integer, "night" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_d17ae45406"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_disponibilities_on_user_id" ON "disponibilities" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171129162339"]]
+  [1m[35m (74.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddConfigToUser (20171130145957)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "config" boolean[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171130145957"]]
+  [1m[35m (51.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddLatitudeAndLongitudeToUser (20171201050049)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "latitude" float[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "longitude" float[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171201050049"]]
+  [1m[35m (52.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddAddressToUser (20171206180509)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "address" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171206180509"]]
+  [1m[35m (51.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateEvents (20171207203758)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "message" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171207203758"]]
+  [1m[35m (217.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateInvitations (20171207220939)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "invitations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "sport_id" integer, "content" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_4caaab9ea4"
+FOREIGN KEY ("sport_id")
+  REFERENCES "sports" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_invitations_on_from_id" ON "invitations" ("from_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_invitations_on_to_id" ON "invitations" ("to_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_to_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_to_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_invitations_on_sport_id" ON "invitations" ("sport_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171207220939"]]
+  [1m[35m (1634.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateComments (20171208181934)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171208181934"]]
+  [1m[35m (985.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserToComment (20171208182403)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "comments" ADD "user_id" integer[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_user_id" ON "comments" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "comments" ADD "from" integer[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "comments" ADD "content" varchar[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171208182403"]]
+  [1m[35m (3690.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserToEvent (20171209213224)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "events" ADD "user_id" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE  INDEX "index_events_on_user_id" ON "events" ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171209213224"]]
+  [1m[35m (66.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddInvitationToEvent (20171209220820)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "events" ADD "invitation_id" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_events_on_invitation_id" ON "events" ("invitation_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171209220820"]]
+  [1m[35m (49.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateResponses (20171213155224)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "responses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "invitation_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_afc0115e6a"
+FOREIGN KEY ("invitation_id")
+  REFERENCES "invitations" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_responses_on_invitation_id" ON "responses" ("invitation_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171213155224"]]
+  [1m[35m (52.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddContentToResponse (20171213155244)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "responses" ADD "content" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171213155244"]]
+  [1m[35m (33.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddResponseToResponse (20171213161426)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "responses" ADD "response" integer[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171213161426"]]
+  [1m[35m (51.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddResponseToInvitation (20171213210531)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "invitations" ADD "has_response" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171213210531"]]
+  [1m[35m (54.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddViewedToEvent (20171213215309)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "events" ADD "viewed" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171213215309"]]
+  [1m[35m (49.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddImageToUser (20171219164419)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "image" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20171219164419"]]
+  [1m[35m (74.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-04-18 23:59:16.432105"], ["updated_at", "2018-04-18 23:59:16.432105"]]
+  [1m[35m (52.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_disponibilities_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_disponibilities_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_invitation_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_invitation_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_sport_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_sport_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_to_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_to_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_invitations_on_from_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_responses_on_invitation_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_responses_on_invitation_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_sports_on_sport_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_sports_on_sport_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_sports_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_sports_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT "sports".* FROM "sports"[0m
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports"[0m
+  [1m[36mInvitation Load (0.1ms)[0m  [1m[34mSELECT "invitations".* FROM "invitations"[0m
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Fútbol"], ["image", "football.png"], ["state", "t"], ["created_at", "2018-04-18 23:59:40.348087"], ["updated_at", "2018-04-18 23:59:40.348087"]]
+  [1m[35m (57.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Tenis"], ["image", "tennis.png"], ["state", "t"], ["created_at", "2018-04-18 23:59:40.408350"], ["updated_at", "2018-04-18 23:59:40.408350"]]
+  [1m[35m (75.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ping-Pong"], ["image", "ping-pong.png"], ["state", "t"], ["created_at", "2018-04-18 23:59:40.486412"], ["updated_at", "2018-04-18 23:59:40.486412"]]
+  [1m[35m (75.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bicicleta"], ["image", "bike.png"], ["state", "t"], ["created_at", "2018-04-18 23:59:40.563846"], ["updated_at", "2018-04-18 23:59:40.563846"]]
+  [1m[35m (73.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Correr"], ["image", "running.png"], ["state", "t"], ["created_at", "2018-04-18 23:59:40.641162"], ["updated_at", "2018-04-18 23:59:40.641162"]]
+  [1m[35m (74.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT "sports".* FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sports" WHERE "sports"."id" = ?[0m  [["id", 1]]
+  [1m[35m (87.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sports" WHERE "sports"."id" = ?[0m  [["id", 2]]
+  [1m[35m (79.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sports" WHERE "sports"."id" = ?[0m  [["id", 3]]
+  [1m[35m (76.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sports" WHERE "sports"."id" = ?[0m  [["id", 4]]
+  [1m[35m (73.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "sports" WHERE "sports"."id" = ?[0m  [["id", 5]]
+  [1m[35m (76.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUserSport Load (0.6ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports"[0m
+  [1m[36mInvitation Load (0.2ms)[0m  [1m[34mSELECT "invitations".* FROM "invitations"[0m
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Fútbol"], ["image", "football.png"], ["state", "t"], ["created_at", "2018-04-19 00:01:01.205626"], ["updated_at", "2018-04-19 00:01:01.205626"]]
+  [1m[35m (77.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Tenis"], ["image", "tennis.png"], ["state", "t"], ["created_at", "2018-04-19 00:01:01.285905"], ["updated_at", "2018-04-19 00:01:01.285905"]]
+  [1m[35m (74.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ping-Pong"], ["image", "ping-pong.png"], ["state", "t"], ["created_at", "2018-04-19 00:01:01.362988"], ["updated_at", "2018-04-19 00:01:01.362988"]]
+  [1m[35m (75.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bicicleta"], ["image", "bike.png"], ["state", "t"], ["created_at", "2018-04-19 00:01:01.440620"], ["updated_at", "2018-04-19 00:01:01.440620"]]
+  [1m[35m (75.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sports" ("name", "image", "state", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Correr"], ["image", "running.png"], ["state", "t"], ["created_at", "2018-04-19 00:01:01.518668"], ["updated_at", "2018-04-19 00:01:01.518668"]]
+  [1m[35m (84.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email10@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email10@gmail.com"], ["encrypted_password", "$2a$11$mU7oPRDYaIzppaoX/ds.Suw37MGm6mq3y5TB98Yao.Oc279lBABKe"], ["created_at", "2018-04-19 00:01:02.325475"], ["updated_at", "2018-04-19 00:01:02.325475"], ["name", "Birdie Bartoletti"], ["gender", 1], ["age", 49], ["latitude", -33.438911], ["longitude", -70.658448]]
+  [1m[35m (84.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email11@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email11@gmail.com"], ["encrypted_password", "$2a$11$/8wjv1gGinvgCAR2CIkur.64H391jTNjM8TGntCPdvaeXYIhBlNY2"], ["created_at", "2018-04-19 00:01:02.567185"], ["updated_at", "2018-04-19 00:01:02.567185"], ["name", "Peggie Tromp"], ["gender", 0], ["age", 77], ["latitude", -33.437648], ["longitude", -70.656807]]
+  [1m[35m (54.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email12@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email12@gmail.com"], ["encrypted_password", "$2a$11$ZtCSVKo5ypJVxlGyZ3XJmuZfPA6z013PhDbPO5t4Z/aZ1M3VRH56q"], ["created_at", "2018-04-19 00:01:02.776543"], ["updated_at", "2018-04-19 00:01:02.776543"], ["name", "Lacey Haley"], ["gender", 1], ["age", 31], ["latitude", -33.440397], ["longitude", -70.653813]]
+  [1m[35m (33.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email13@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email13@gmail.com"], ["encrypted_password", "$2a$11$0SX/BfyIzvneelENFzS6zOL8cGDqyVy4f3B8g/Onujq54EoMpkLD6"], ["created_at", "2018-04-19 00:01:02.965168"], ["updated_at", "2018-04-19 00:01:02.965168"], ["name", "Keenan Becker"], ["gender", 1], ["age", 75], ["latitude", -33.435133], ["longitude", -70.660862]]
+  [1m[35m (55.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email14@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email14@gmail.com"], ["encrypted_password", "$2a$11$ZwmCR/2/NYtn38o06oaMoewCbYfACso5wkX7sx2b57gmwxnLo03zS"], ["created_at", "2018-04-19 00:01:03.176280"], ["updated_at", "2018-04-19 00:01:03.176280"], ["name", "Vernie Howell"], ["gender", 0], ["age", 76], ["latitude", -33.436314], ["longitude", -70.650026]]
+  [1m[35m (76.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email15@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email15@gmail.com"], ["encrypted_password", "$2a$11$/9KjUydc0SLvETeE993Uqe0bSG8ozbrvfMvX1oSHlTY83cOF7/sLW"], ["created_at", "2018-04-19 00:01:03.407995"], ["updated_at", "2018-04-19 00:01:03.407995"], ["name", "Tabitha Nienow"], ["gender", 1], ["age", 58], ["latitude", -33.428267], ["longitude", -70.602534]]
+  [1m[35m (79.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email16@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email16@gmail.com"], ["encrypted_password", "$2a$11$ZGM0074gldVFZgxZhBKzz.GR08BRkoKyXQpjCmR0TMr61uDcXZry6"], ["created_at", "2018-04-19 00:01:03.641837"], ["updated_at", "2018-04-19 00:01:03.641837"], ["name", "Leopold Bergstrom"], ["gender", 0], ["age", 27], ["latitude", -33.436895], ["longitude", -70.600315]]
+  [1m[35m (133.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email17@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email17@gmail.com"], ["encrypted_password", "$2a$11$wPabI.LPk5kAUfV.QvGL1.2TyB0CbwkSepwXnoCEyHaItgL6z1HvS"], ["created_at", "2018-04-19 00:01:03.941163"], ["updated_at", "2018-04-19 00:01:03.941163"], ["name", "Mrs. Christa Bartoletti"], ["gender", 1], ["age", 58], ["latitude", -33.43429], ["longitude", -70.582596]]
+  [1m[35m (65.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "email18@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name", "gender", "age", "latitude", "longitude") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "email18@gmail.com"], ["encrypted_password", "$2a$11$XMg8X6wGlbL2s/oeBe8/Se/gmmURz3En6Gr3zhhqEFGJSuEJylQZS"], ["created_at", "2018-04-19 00:01:04.160701"], ["updated_at", "2018-04-19 00:01:04.160701"], ["name", "Wyatt McKenzie"], ["gender", 0], ["age", 51], ["latitude", -33.429698], ["longitude", -70.61724]]
+  [1m[35m (71.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 6], ["sport_id", 8], ["created_at", "2018-04-19 00:01:04.293833"], ["updated_at", "2018-04-19 00:01:04.293833"], ["expertice", 8]]
+  [1m[35m (55.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 9], ["sport_id", 8], ["created_at", "2018-04-19 00:01:04.354950"], ["updated_at", "2018-04-19 00:01:04.354950"], ["expertice", 6]]
+  [1m[35m (83.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 3], ["sport_id", 8], ["created_at", "2018-04-19 00:01:04.443765"], ["updated_at", "2018-04-19 00:01:04.443765"], ["expertice", 2]]
+  [1m[35m (48.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 4], ["sport_id", 7], ["created_at", "2018-04-19 00:01:04.500073"], ["updated_at", "2018-04-19 00:01:04.500073"], ["expertice", 4]]
+  [1m[35m (71.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 2], ["sport_id", 7], ["created_at", "2018-04-19 00:01:04.577587"], ["updated_at", "2018-04-19 00:01:04.577587"], ["expertice", 4]]
+  [1m[35m (82.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 6], ["sport_id", 7], ["created_at", "2018-04-19 00:01:04.665230"], ["updated_at", "2018-04-19 00:01:04.665230"], ["expertice", 9]]
+  [1m[35m (82.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 1], ["sport_id", 8], ["created_at", "2018-04-19 00:01:04.754916"], ["updated_at", "2018-04-19 00:01:04.754916"], ["expertice", 5]]
+  [1m[35m (59.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 2], ["sport_id", 9], ["created_at", "2018-04-19 00:01:04.819905"], ["updated_at", "2018-04-19 00:01:04.819905"], ["expertice", 1]]
+  [1m[35m (49.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 2], ["sport_id", 8], ["created_at", "2018-04-19 00:01:04.876357"], ["updated_at", "2018-04-19 00:01:04.876357"], ["expertice", 8]]
+  [1m[35m (80.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 3], ["sport_id", 7], ["created_at", "2018-04-19 00:01:04.964982"], ["updated_at", "2018-04-19 00:01:04.964982"], ["expertice", 1]]
+  [1m[35m (82.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 7], ["sport_id", 8], ["created_at", "2018-04-19 00:01:05.053234"], ["updated_at", "2018-04-19 00:01:05.053234"], ["expertice", 8]]
+  [1m[35m (46.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 9], ["sport_id", 7], ["created_at", "2018-04-19 00:01:05.107857"], ["updated_at", "2018-04-19 00:01:05.107857"], ["expertice", 5]]
+  [1m[35m (48.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 3], ["sport_id", 7], ["created_at", "2018-04-19 00:01:05.163716"], ["updated_at", "2018-04-19 00:01:05.163716"], ["expertice", 2]]
+  [1m[35m (71.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 9], ["sport_id", 6], ["created_at", "2018-04-19 00:01:05.241693"], ["updated_at", "2018-04-19 00:01:05.241693"], ["expertice", 1]]
+  [1m[35m (103.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 9], ["sport_id", 9], ["created_at", "2018-04-19 00:01:05.352007"], ["updated_at", "2018-04-19 00:01:05.352007"], ["expertice", 4]]
+  [1m[35m (60.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 6], ["sport_id", 10], ["created_at", "2018-04-19 00:01:05.417802"], ["updated_at", "2018-04-19 00:01:05.417802"], ["expertice", 2]]
+  [1m[35m (92.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 7], ["sport_id", 7], ["created_at", "2018-04-19 00:01:05.516414"], ["updated_at", "2018-04-19 00:01:05.516414"], ["expertice", 2]]
+  [1m[35m (71.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 2], ["sport_id", 8], ["created_at", "2018-04-19 00:01:05.595095"], ["updated_at", "2018-04-19 00:01:05.595095"], ["expertice", 5]]
+  [1m[35m (71.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 4], ["sport_id", 7], ["created_at", "2018-04-19 00:01:05.672655"], ["updated_at", "2018-04-19 00:01:05.672655"], ["expertice", 6]]
+  [1m[35m (81.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "sports"."id" FROM "sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 9], ["sport_id", 7], ["created_at", "2018-04-19 00:01:05.762145"], ["updated_at", "2018-04-19 00:01:05.762145"], ["expertice", 1]]
+  [1m[35m (93.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "user_sports" WHERE "user_sports"."id" = ?[0m  [["id", 19]]
+  [1m[35m (83.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "user_sports" WHERE "user_sports"."id" = ?[0m  [["id", 18]]
+  [1m[35m (87.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "user_sports" WHERE "user_sports"."id" = ?[0m  [["id", 13]]
+  [1m[35m (76.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "user_sports" WHERE "user_sports"."id" = ?[0m  [["id", 20]]
+  [1m[35m (99.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE (1=1)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.225309"], ["updated_at", "2018-04-19 00:01:06.225309"], ["user_id", 1], ["from", 2], ["content", "demasiado bueno en ping pong, debería ser profesional"]]
+  [1m[35m (50.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" != 1)[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.281902"], ["updated_at", "2018-04-19 00:01:06.281902"], ["user_id", 2], ["from", 3], ["content", "llega a la hora"]]
+  [1m[35m (81.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2))[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.370135"], ["updated_at", "2018-04-19 00:01:06.370135"], ["user_id", 3], ["from", 3], ["content", "demasiado bueno en ping pong, debería ser profesional"]]
+  [1m[35m (70.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3))[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.448738"], ["updated_at", "2018-04-19 00:01:06.448738"], ["user_id", 4], ["from", 7], ["content", "llega a la hora"]]
+  [1m[35m (80.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3, 4))[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.535574"], ["updated_at", "2018-04-19 00:01:06.535574"], ["user_id", 5], ["from", 6], ["content", "Se portó súper bien, nos llev+ó en auto"]]
+  [1m[35m (94.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3, 4, 5))[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.634805"], ["updated_at", "2018-04-19 00:01:06.634805"], ["user_id", 6], ["from", 7], ["content", "demasiado bueno en ping pong, debería ser profesional"]]
+  [1m[35m (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3, 4, 5, 6))[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.691388"], ["updated_at", "2018-04-19 00:01:06.691388"], ["user_id", 7], ["from", 8], ["content", "te pasaste compadre.. estuvo bueno el tenis"]]
+  [1m[35m (59.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3, 4, 5, 6, 7))[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.757974"], ["updated_at", "2018-04-19 00:01:06.757974"], ["user_id", 8], ["from", 8], ["content", "va a todas siempre...."]]
+  [1m[35m (50.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "comments"."id" FROM "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "users"."id" FROM "users" WHERE ("users"."id" NOT IN (1, 2, 3, 4, 5, 6, 7, 8))[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("created_at", "updated_at", "user_id", "from", "content") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2018-04-19 00:01:06.813086"], ["updated_at", "2018-04-19 00:01:06.813086"], ["user_id", 9], ["from", 9], ["content", "te pasaste compadre.. estuvo bueno el tenis"]]
+  [1m[35m (82.8ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:01:21 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:01:25 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (8939.1ms)
+  Rendered pages/index.html.erb within layouts/application (5511.3ms)
+Completed 200 OK in 5734ms (Views: 5733.2ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 9639ms (Views: 9603.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:01:31 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:31 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:31 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:31 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:01:40 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:40 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:40 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:40 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:01:49 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:49 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:49 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:49 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:01:56 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:56 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:56 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:01:56 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:04 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:04 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:04 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:04 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:13 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:13 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:13 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:13 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:23 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:23 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:23 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:23 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:33 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:33 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:33 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:33 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:44 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:44 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:44 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:44 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:02:56 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:56 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:56 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:02:56 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:03:08 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:08 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:08 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:08 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:03:20 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:20 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:20 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:20 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:03:33 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:33 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:33 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:33 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:03:46 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:46 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:46 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:03:46 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:04:00 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:00 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:00 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:00 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:04:13 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:13 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:13 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:13 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:04:28 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:28 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:28 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:28 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:04:42 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:42 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:42 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:42 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:04:57 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:57 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:57 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:04:57 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:05:15 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (1496.4ms)
+Completed 200 OK in 1620ms (Views: 1604.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:05:17 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:17 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:17 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:17 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:05:27 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:27 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:27 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:27 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:05:39 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:39 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:39 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:39 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:05:47 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:47 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:47 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:47 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:05:56 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:56 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:56 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:05:56 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:06:06 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:06 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:06 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:06 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:06:16 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:16 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:16 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:16 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:06:27 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:27 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:27 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:27 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:06:39 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:39 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:39 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:39 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:06:51 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:51 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:51 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:06:51 -0300
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-04-18 21:07:00 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (468.9ms)
+Completed 200 OK in 687ms (Views: 648.4ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:07:03 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:03 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:03 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:03 -0300
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2018-04-18 21:07:05 -0300
+Started GET "/users/auth/facebook" for 127.0.0.1 at 2018-04-18 21:07:05 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:07:25 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:25 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:25 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:25 -0300
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-04-18 21:07:29 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 78ms (Views: 76.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:07:34 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:34 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:34 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:34 -0300
+Started POST "/users" for 127.0.0.1 at 2018-04-18 21:07:44 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AXN0c0H9iUzekM8WGBrmUH/4DgWHPBVBk5Bgb9TNr0Wgrik+165jRQeljjjIWSIP0R/2tF6Ew1DGnlk8CaWvLA==", "user"=>{"name"=>"Yannick", "email"=>"brionneyannick@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Registrarse"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "brionneyannick@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "name") VALUES (?, ?, ?, ?, ?)[0m  [["email", "brionneyannick@gmail.com"], ["encrypted_password", "$2a$11$b/pSul3bqHHhgV6.lRzqtuF3iXVVWF1N5Rs0HC7f0sN9FtBiqwrqO"], ["created_at", "2018-04-19 00:07:44.544431"], ["updated_at", "2018-04-19 00:07:44.544431"], ["name", "Yannick"]]
+  [1m[35m (82.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-04-19 00:07:44.633390"], ["last_sign_in_at", "2018-04-19 00:07:44.633390"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-04-19 00:07:44.634078"], ["id", 10]]
+  [1m[35m (73.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/aditional_data/steps.10
+Completed 302 Found in 361ms (ActiveRecord: 157.9ms)
+
+
+Started GET "/aditional_data/steps.10" for 127.0.0.1 at 2018-04-18 21:07:44 -0300
+Processing by AditionalDataController#steps as 
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering aditional_data/steps.html.erb within layouts/application
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered aditional_data/_steps_progress.html.erb (41.8ms)
+  [1m[36mSport Load (0.7ms)[0m  [1m[34mSELECT DISTINCT sports.*, user_sports.expertice FROM "sports" LEFT OUTER JOIN "user_sports" ON "user_sports"."sport_id" = "sports"."id" GROUP BY "sports"."id"[0m
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 6]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 6]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 6]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 6]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 6]]
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 7]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 7]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 7]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 7]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 7]]
+  [1m[36mUserSport Load (0.1ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[36mUserSport Load (0.3ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  [1m[36mCACHE UserSport Load (0.0ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  Rendered aditional_data/_choose_sports.html.erb (25.7ms)
+  Rendered aditional_data/steps.html.erb within layouts/application (74.9ms)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (5.9ms)
+  Rendered layouts/_navbar.html.erb (10.0ms)
+Completed 200 OK in 191ms (Views: 155.9ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:07:45 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:07:45 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+[ActionCable] [User 10] Registered connection (Z2lkOi8vanVudGFyc2UvVXNlci8xMA)
+[ActionCable] [User 10] ActivityChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] ActivityChannel is streaming from activity_channel
+[ActionCable] [User 10] RoomChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] RoomChannel is streaming from room_channel
+Started POST "/geocoder/findaddress" for 127.0.0.1 at 2018-04-18 21:07:46 -0300
+Processing by GeocoderController#findaddress as JS
+  Parameters: {"latitude"=>"-33.4400437", "longitude"=>"-70.6582366"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "users" SET "latitude" = ?, "longitude" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["latitude", -33.4400437], ["longitude", -70.6582366], ["updated_at", "2018-04-19 00:07:46.565740"], ["id", 10]]
+  [1m[35m (113.3ms)[0m  [1m[36mcommit transaction[0m
+No template found for GeocoderController#findaddress, rendering head :no_content
+Completed 204 No Content in 588ms (ActiveRecord: 114.5ms)
+
+
+Started POST "/aditional_data/choose_sports" for 127.0.0.1 at 2018-04-18 21:08:16 -0300
+Processing by AditionalDataController#choose_sports as */*
+  Parameters: {"sports"=>{"8"=>"5", "9"=>"5", "10"=>"5"}, "action_sender"=>""}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUserSport Load (0.3ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 8]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 10], ["sport_id", 8], ["created_at", "2018-04-19 00:08:16.058054"], ["updated_at", "2018-04-19 00:08:16.058054"], ["expertice", 5]]
+  [1m[35m (74.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 9]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 10], ["sport_id", 9], ["created_at", "2018-04-19 00:08:16.140144"], ["updated_at", "2018-04-19 00:08:16.140144"], ["expertice", 5]]
+  [1m[35m (126.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUserSport Load (0.2ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND "user_sports"."sport_id" = ?[0m  [["user_id", 10], ["sport_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "user_sports" ("user_id", "sport_id", "created_at", "updated_at", "expertice") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 10], ["sport_id", 10], ["created_at", "2018-04-19 00:08:16.273107"], ["updated_at", "2018-04-19 00:08:16.273107"], ["expertice", 5]]
+  [1m[35m (91.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUserSport Load (0.3ms)[0m  [1m[34mSELECT "user_sports".* FROM "user_sports" WHERE "user_sports"."user_id" = ? AND ("user_sports"."sport_id" NOT IN (8, 9, 10))[0m  [["user_id", 10]]
+  Rendering aditional_data/choose_sports.js.erb
+  Rendered aditional_data/_choose_gender_and_age.html.erb (0.8ms)
+  Rendered aditional_data/choose_sports.js.erb (5.2ms)
+Completed 200 OK in 348ms (Views: 11.5ms | ActiveRecord: 297.0ms)
+
+
+Started POST "/aditional_data/choose_gender_and_age" for 127.0.0.1 at 2018-04-18 21:08:43 -0300
+Processing by AditionalDataController#choose_gender_and_age as JS
+  Parameters: {"age"=>"28", "gender"=>"0", "action_sender"=>""}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "users" SET "gender" = ?, "age" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["gender", 0], ["age", 28], ["updated_at", "2018-04-19 00:08:43.041403"], ["id", 10]]
+  [1m[35m (256.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering aditional_data/choose_gender_and_age.js.erb
+  [1m[36mDisponibility Load (0.1ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 1]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 1]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 1]]
+  [1m[36mDisponibility Load (0.1ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 2]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 2]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 2]]
+  [1m[36mDisponibility Load (0.1ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 3]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 3]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 3]]
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 4]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 4]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 4]]
+  [1m[36mDisponibility Load (0.3ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 5]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 5]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 5]]
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 6]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 6]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 6]]
+  [1m[36mDisponibility Load (0.1ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 7]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 7]]
+  [1m[36mCACHE Disponibility Load (0.0ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."user_id" = ? AND "disponibilities"."day" = ?[0m  [["user_id", 10], ["day", 7]]
+  Rendered aditional_data/_choose_disponibility.html.erb (19.5ms)
+  Rendered aditional_data/choose_gender_and_age.js.erb (24.7ms)
+Completed 200 OK in 299ms (Views: 30.7ms | ActiveRecord: 259.1ms)
+
+
+Started POST "/aditional_data/choose_disponibility" for 127.0.0.1 at 2018-04-18 21:08:58 -0300
+Processing by AditionalDataController#choose_disponibility as JS
+  Parameters: {"disponibilities"=>{"1"=>["2"], "2"=>["2"], "3"=>["2"], "4"=>["2"], "5"=>["2"], "6"=>["0", "1", "2"], "7"=>["0", "1", "2"]}, "action_sender"=>""}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mDisponibility Load (0.3ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 1], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day", 1], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.093697"], ["updated_at", "2018-04-19 00:08:58.093697"]]
+  [1m[35m (92.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 2], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day", 2], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.193264"], ["updated_at", "2018-04-19 00:08:58.193264"]]
+  [1m[35m (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 3], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day", 3], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.249196"], ["updated_at", "2018-04-19 00:08:58.249196"]]
+  [1m[35m (103.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.3ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 4], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day", 4], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.360153"], ["updated_at", "2018-04-19 00:08:58.360153"]]
+  [1m[35m (59.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 5], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day", 5], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.425787"], ["updated_at", "2018-04-19 00:08:58.425787"]]
+  [1m[35m (84.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 6], ["user_id", 10]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "morning", "afternoon", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["day", 6], ["morning", 1], ["afternoon", 1], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.514405"], ["updated_at", "2018-04-19 00:08:58.514405"]]
+  [1m[35m (61.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mDisponibility Load (0.2ms)[0m  [1m[34mSELECT "disponibilities".* FROM "disponibilities" WHERE "disponibilities"."day" = ? AND "disponibilities"."user_id" = ?[0m  [["day", 7], ["user_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "disponibilities" ("day", "morning", "afternoon", "night", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["day", 7], ["morning", 1], ["afternoon", 1], ["night", 1], ["user_id", 10], ["created_at", "2018-04-19 00:08:58.580651"], ["updated_at", "2018-04-19 00:08:58.580651"]]
+  [1m[35m (70.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "config" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["config", "t"], ["updated_at", "2018-04-19 00:08:58.657218"], ["id", 10]]
+  [1m[35m (93.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/pages/dashboard
+Completed 200 OK in 689ms (ActiveRecord: 623.7ms)
+
+
+Started GET "/pages/dashboard" for 127.0.0.1 at 2018-04-18 21:08:58 -0300
+Processing by PagesController#dashboard as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "sport_id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT DISTINCT users.*, users.*, (111.19492664455873 * ABS(users.latitude - -33.440191) * 0.7071067811865475) + (96.29763124613503 * ABS(users.longitude - -70.658969) * 0.7071067811865475) AS distance, CASE WHEN (users.latitude >= -33.440191 AND users.longitude >= -70.658969) THEN  45.0 WHEN (users.latitude <  -33.440191 AND users.longitude >= -70.658969) THEN 135.0 WHEN (users.latitude <  -33.440191 AND users.longitude <  -70.658969) THEN 225.0 WHEN (users.latitude >= -33.440191 AND users.longitude <  -70.658969) THEN 315.0 END AS bearing FROM "users" LEFT OUTER JOIN "user_sports" ON "user_sports"."user_id" = "users"."id" WHERE (user_sports.sport_id in (8, 9, 10)) AND (users.latitude BETWEEN -33.62005532118374 AND -33.260326678816256 AND users.longitude BETWEEN -70.87451437626878 AND -70.44342362373122) AND "users"."gender" = ? AND (age >= 21) AND (age <= 35) AND ("users"."id" != 10) ORDER BY distance ASC[0m  [["gender", 0]]
+  Rendering pages/dashboard.html.erb within layouts/application
+  [1m[36mSport Load (0.2ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered pages/left-sidebar/_dashboard.html.erb (2.7ms)
+  [1m[36mSport Load (0.5ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ? AND "sports"."id" IN (SELECT "sports"."id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?)[0m  [["user_id", 10], ["user_id", 10]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 8], ["LIMIT", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 9], ["LIMIT", 5]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 10], ["LIMIT", 5]]
+  Rendered pages/_user-sports.html.erb (15.2ms)
+  Rendered pages/main/_dashboard.html.erb (18.2ms)
+  Rendered pages/dashboard.html.erb within layouts/application (23.3ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (2.7ms)
+  Rendered layouts/_navbar.html.erb (4.3ms)
+Completed 200 OK in 137ms (Views: 98.7ms | ActiveRecord: 4.1ms)
+
+
+Started POST "/geocoder/findaddress" for 127.0.0.1 at 2018-04-18 21:08:59 -0300
+Processing by GeocoderController#findaddress as JS
+  Parameters: {"latitude"=>"-33.4400437", "longitude"=>"-70.6582366"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+No template found for GeocoderController#findaddress, rendering head :no_content
+Completed 204 No Content in 67ms (ActiveRecord: 0.4ms)
+
+
+Started POST "/events/last_events" for 127.0.0.1 at 2018-04-18 21:09:46 -0300
+Processing by EventsController#last_events as */*
+  Parameters: {"script"=>nil}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering events/last_events.js.erb
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT  1 FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ? ORDER BY "events"."updated_at" DESC LIMIT ?) subquery_for_count[0m  [["user_id", 10], ["viewed", "f"], ["LIMIT", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "invitations" WHERE "invitations"."to_id" = ?[0m  [["to_id", 10]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "invitations" WHERE "invitations"."from_id" = ?[0m  [["from_id", 10]]
+  Rendered events/_events-box.html.erb (8.2ms)
+  Rendered events/last_events.js.erb (11.6ms)
+Completed 200 OK in 23ms (Views: 16.6ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/invitations/invite_users" for 127.0.0.1 at 2018-04-18 21:10:03 -0300
+Processing by InvitationsController#invite_users as JS
+  Parameters: {"users"=>["7"], "sport"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering invitations/invite_users.js.erb
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."user_id" = ?[0m  [["user_id", 7]]
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = ? ORDER BY "comments"."updated_at" DESC LIMIT ?[0m  [["user_id", 7], ["LIMIT", 3]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendered modals/_modal-invite.html.erb (24.6ms)
+  Rendered invitations/invite_users.js.erb (33.8ms)
+Completed 200 OK in 59ms (Views: 42.9ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/invitations/invite_users" for 127.0.0.1 at 2018-04-18 21:10:10 -0300
+Processing by InvitationsController#invite_users as JS
+  Parameters: {"users"=>["7"], "sport"=>"8"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering invitations/invite_users.js.erb
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."user_id" = ?[0m  [["user_id", 7]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = ? ORDER BY "comments"."updated_at" DESC LIMIT ?[0m  [["user_id", 7], ["LIMIT", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendered modals/_modal-invite.html.erb (6.6ms)
+  Rendered invitations/invite_users.js.erb (10.6ms)
+Completed 200 OK in 26ms (Views: 15.1ms | ActiveRecord: 1.5ms)
+
+
+[ActionCable] [User 10] ActivityChannel#send_event({"user"=>7})
+[ActionCable] [User 10]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[ActionCable] [User 10]   [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 7], ["viewed", "f"]]
+Started POST "/invitations" for 127.0.0.1 at 2018-04-18 21:10:35 -0300
+[ActionCable] [User 10] [ActiveJob] Enqueued EventBroadcastJob (Job ID: dcb23177-eaa2-4053-9392-57ae280466e6) to Async(default) with arguments: 7, 0
+[ActiveJob] [EventBroadcastJob] [dcb23177-eaa2-4053-9392-57ae280466e6] Performing EventBroadcastJob (Job ID: dcb23177-eaa2-4053-9392-57ae280466e6) from Async(default) with arguments: 7, 0
+Processing by InvitationsController#create as JS
+  Parameters: {"users"=>["7"], "content"=>"Hola Leopold", "sport"=>"8"}
+[ActiveJob] [EventBroadcastJob] [dcb23177-eaa2-4053-9392-57ae280466e6] [ActionCable] Broadcasting to activity_channel: {:events=>0, :user_id=>7}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+[ActiveJob] [EventBroadcastJob] [dcb23177-eaa2-4053-9392-57ae280466e6] Performed EventBroadcastJob (Job ID: dcb23177-eaa2-4053-9392-57ae280466e6) from Async(default) in 2.07ms
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActionCable] [User 10] ActivityChannel transmitting {"events"=>0, "user_id"=>7} (via streamed from activity_channel)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mSport Load (0.1ms)[0m  [1m[34mSELECT  "sports".* FROM "sports" WHERE "sports"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "invitations" ("from_id", "to_id", "sport_id", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["from_id", 10], ["to_id", 7], ["sport_id", 8], ["content", "Hola Leopold"], ["created_at", "2018-04-19 00:10:35.133151"], ["updated_at", "2018-04-19 00:10:35.133151"]]
+  [1m[35m (116.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mInvitation Load (0.2ms)[0m  [1m[34mSELECT  "invitations".* FROM "invitations" WHERE "invitations"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "events" ("message", "created_at", "updated_at", "user_id", "invitation_id") VALUES (?, ?, ?, ?, ?)[0m  [["message", "Tienes una nueva invitación para jugar"], ["created_at", "2018-04-19 00:10:35.286752"], ["updated_at", "2018-04-19 00:10:35.286752"], ["user_id", 7], ["invitation_id", 1]]
+  [1m[35m (62.3ms)[0m  [1m[36mcommit transaction[0m
+No template found for InvitationsController#create, rendering head :no_content
+Completed 204 No Content in 270ms (ActiveRecord: 181.6ms)
+
+
+Started POST "/invitations/invite_users" for 127.0.0.1 at 2018-04-18 21:10:56 -0300
+Processing by InvitationsController#invite_users as JS
+  Parameters: {"users"=>["7"], "sport"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering invitations/invite_users.js.erb
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."user_id" = ?[0m  [["user_id", 7]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = ? ORDER BY "comments"."updated_at" DESC LIMIT ?[0m  [["user_id", 7], ["LIMIT", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendered modals/_modal-invite.html.erb (6.4ms)
+  Rendered invitations/invite_users.js.erb (10.9ms)
+Completed 200 OK in 26ms (Views: 16.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/pages/dashboard" for 127.0.0.1 at 2018-04-18 21:11:14 -0300
+Processing by PagesController#dashboard as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "sport_id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT DISTINCT users.*, users.*, (111.19492664455873 * ABS(users.latitude - -33.440191) * 0.7071067811865475) + (96.29763124613503 * ABS(users.longitude - -70.658969) * 0.7071067811865475) AS distance, CASE WHEN (users.latitude >= -33.440191 AND users.longitude >= -70.658969) THEN  45.0 WHEN (users.latitude <  -33.440191 AND users.longitude >= -70.658969) THEN 135.0 WHEN (users.latitude <  -33.440191 AND users.longitude <  -70.658969) THEN 225.0 WHEN (users.latitude >= -33.440191 AND users.longitude <  -70.658969) THEN 315.0 END AS bearing FROM "users" LEFT OUTER JOIN "user_sports" ON "user_sports"."user_id" = "users"."id" WHERE (user_sports.sport_id in (8, 9, 10)) AND (users.latitude BETWEEN -33.62005532118374 AND -33.260326678816256 AND users.longitude BETWEEN -70.87451437626878 AND -70.44342362373122) AND "users"."gender" = ? AND (age >= 21) AND (age <= 35) AND ("users"."id" != 10) ORDER BY distance ASC[0m  [["gender", 0]]
+  Rendering pages/dashboard.html.erb within layouts/application
+  [1m[36mSport Load (0.2ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered pages/left-sidebar/_dashboard.html.erb (1.7ms)
+  [1m[36mSport Load (0.3ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ? AND "sports"."id" IN (SELECT "sports"."id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?)[0m  [["user_id", 10], ["user_id", 10]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 8], ["LIMIT", 5]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 9], ["LIMIT", 5]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 10], ["LIMIT", 5]]
+  Rendered pages/_user-sports.html.erb (14.7ms)
+  Rendered pages/main/_dashboard.html.erb (17.5ms)
+  Rendered pages/dashboard.html.erb within layouts/application (21.8ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (3.0ms)
+  Rendered layouts/_navbar.html.erb (4.7ms)
+Completed 200 OK in 499ms (Views: 488.6ms | ActiveRecord: 3.5ms)
+
+
+[ActionCable] [User 10] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:11:15 -0300
+[ActionCable] [User 10] ActivityChannel stopped streaming from activity_channel
+[ActionCable] [User 10] RoomChannel stopped streaming from room_channel
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:11:15 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:11:15 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+[ActionCable] [User 10] Registered connection (Z2lkOi8vanVudGFyc2UvVXNlci8xMA)
+[ActionCable] [User 10] RoomChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] RoomChannel is streaming from room_channel
+[ActionCable] [User 10] ActivityChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] ActivityChannel is streaming from activity_channel
+Started POST "/invitations/invite_users" for 127.0.0.1 at 2018-04-18 21:11:19 -0300
+Processing by InvitationsController#invite_users as JS
+  Parameters: {"users"=>["7"], "sport"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering invitations/invite_users.js.erb
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments" WHERE "comments"."user_id" = ?[0m  [["user_id", 7]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT  "comments".* FROM "comments" WHERE "comments"."user_id" = ? ORDER BY "comments"."updated_at" DESC LIMIT ?[0m  [["user_id", 7], ["LIMIT", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendered modals/_modal-invite.html.erb (5.9ms)
+  Rendered invitations/invite_users.js.erb (9.9ms)
+Completed 200 OK in 21ms (Views: 14.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/pages/dashboard" for 127.0.0.1 at 2018-04-18 21:13:10 -0300
+Processing by PagesController#dashboard as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "sport_id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT DISTINCT users.*, users.*, (111.19492664455873 * ABS(users.latitude - -33.440191) * 0.7071067811865475) + (96.29763124613503 * ABS(users.longitude - -70.658969) * 0.7071067811865475) AS distance, CASE WHEN (users.latitude >= -33.440191 AND users.longitude >= -70.658969) THEN  45.0 WHEN (users.latitude <  -33.440191 AND users.longitude >= -70.658969) THEN 135.0 WHEN (users.latitude <  -33.440191 AND users.longitude <  -70.658969) THEN 225.0 WHEN (users.latitude >= -33.440191 AND users.longitude <  -70.658969) THEN 315.0 END AS bearing FROM "users" LEFT OUTER JOIN "user_sports" ON "user_sports"."user_id" = "users"."id" WHERE (user_sports.sport_id in (8, 9, 10)) AND (users.latitude BETWEEN -33.62005532118374 AND -33.260326678816256 AND users.longitude BETWEEN -70.87451437626878 AND -70.44342362373122) AND "users"."gender" = ? AND (age >= 21) AND (age <= 35) AND ("users"."id" != 10) ORDER BY distance ASC[0m  [["gender", 0]]
+  Rendering pages/dashboard.html.erb within layouts/application
+  [1m[36mSport Load (0.3ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered pages/left-sidebar/_dashboard.html.erb (3.7ms)
+  [1m[36mSport Load (0.4ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ? AND "sports"."id" IN (SELECT "sports"."id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?)[0m  [["user_id", 10], ["user_id", 10]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 8], ["LIMIT", 5]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 9], ["LIMIT", 5]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 10], ["LIMIT", 5]]
+  Rendered pages/_user-sports.html.erb (21.3ms)
+  Rendered pages/main/_dashboard.html.erb (27.1ms)
+  Rendered pages/dashboard.html.erb within layouts/application (34.9ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (3.4ms)
+  Rendered layouts/_navbar.html.erb (5.2ms)
+Completed 200 OK in 154ms (Views: 143.7ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:13:15 -0300
+Processing by PagesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+Redirected to http://localhost:3000/pages/dashboard
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/dashboard" for 127.0.0.1 at 2018-04-18 21:13:15 -0300
+Processing by PagesController#dashboard as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "sport_id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT DISTINCT users.*, users.*, (111.19492664455873 * ABS(users.latitude - -33.440191) * 0.7071067811865475) + (96.29763124613503 * ABS(users.longitude - -70.658969) * 0.7071067811865475) AS distance, CASE WHEN (users.latitude >= -33.440191 AND users.longitude >= -70.658969) THEN  45.0 WHEN (users.latitude <  -33.440191 AND users.longitude >= -70.658969) THEN 135.0 WHEN (users.latitude <  -33.440191 AND users.longitude <  -70.658969) THEN 225.0 WHEN (users.latitude >= -33.440191 AND users.longitude <  -70.658969) THEN 315.0 END AS bearing FROM "users" LEFT OUTER JOIN "user_sports" ON "user_sports"."user_id" = "users"."id" WHERE (user_sports.sport_id in (8, 9, 10)) AND (users.latitude BETWEEN -33.62005532118374 AND -33.260326678816256 AND users.longitude BETWEEN -70.87451437626878 AND -70.44342362373122) AND "users"."gender" = ? AND (age >= 21) AND (age <= 35) AND ("users"."id" != 10) ORDER BY distance ASC[0m  [["gender", 0]]
+  Rendering pages/dashboard.html.erb within layouts/application
+  [1m[36mSport Load (0.3ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered pages/left-sidebar/_dashboard.html.erb (2.4ms)
+  [1m[36mSport Load (0.3ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ? AND "sports"."id" IN (SELECT "sports"."id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?)[0m  [["user_id", 10], ["user_id", 10]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 8], ["LIMIT", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 9], ["LIMIT", 5]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 10], ["LIMIT", 5]]
+  Rendered pages/_user-sports.html.erb (15.4ms)
+  Rendered pages/main/_dashboard.html.erb (19.2ms)
+  Rendered pages/dashboard.html.erb within layouts/application (25.1ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (3.6ms)
+  Rendered layouts/_navbar.html.erb (5.5ms)
+Completed 200 OK in 138ms (Views: 127.9ms | ActiveRecord: 4.0ms)
+
+
+[ActionCable] [User 10] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:15 -0300
+[ActionCable] [User 10] ActivityChannel stopped streaming from activity_channel
+[ActionCable] [User 10] RoomChannel stopped streaming from room_channel
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:15 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:15 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+[ActionCable] [User 10] Registered connection (Z2lkOi8vanVudGFyc2UvVXNlci8xMA)
+[ActionCable] [User 10] RoomChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] RoomChannel is streaming from room_channel
+[ActionCable] [User 10] ActivityChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] ActivityChannel is streaming from activity_channel
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:13:20 -0300
+Processing by PagesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+Redirected to http://localhost:3000/pages/dashboard
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/pages/dashboard" for 127.0.0.1 at 2018-04-18 21:13:20 -0300
+Processing by PagesController#dashboard as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "sport_id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT DISTINCT users.*, users.*, (111.19492664455873 * ABS(users.latitude - -33.440191) * 0.7071067811865475) + (96.29763124613503 * ABS(users.longitude - -70.658969) * 0.7071067811865475) AS distance, CASE WHEN (users.latitude >= -33.440191 AND users.longitude >= -70.658969) THEN  45.0 WHEN (users.latitude <  -33.440191 AND users.longitude >= -70.658969) THEN 135.0 WHEN (users.latitude <  -33.440191 AND users.longitude <  -70.658969) THEN 225.0 WHEN (users.latitude >= -33.440191 AND users.longitude <  -70.658969) THEN 315.0 END AS bearing FROM "users" LEFT OUTER JOIN "user_sports" ON "user_sports"."user_id" = "users"."id" WHERE (user_sports.sport_id in (8, 9, 10)) AND (users.latitude BETWEEN -33.62005532118374 AND -33.260326678816256 AND users.longitude BETWEEN -70.87451437626878 AND -70.44342362373122) AND "users"."gender" = ? AND (age >= 21) AND (age <= 35) AND ("users"."id" != 10) ORDER BY distance ASC[0m  [["gender", 0]]
+  Rendering pages/dashboard.html.erb within layouts/application
+  [1m[36mSport Load (0.2ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?[0m  [["user_id", 10]]
+  Rendered pages/left-sidebar/_dashboard.html.erb (2.3ms)
+  [1m[36mSport Load (0.6ms)[0m  [1m[34mSELECT "sports".* FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ? AND "sports"."id" IN (SELECT "sports"."id" FROM "sports" INNER JOIN "user_sports" ON "sports"."id" = "user_sports"."sport_id" WHERE "user_sports"."user_id" = ?)[0m  [["user_id", 10], ["user_id", 10]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 8], ["LIMIT", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 9], ["LIMIT", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" INNER JOIN "user_sports" ON "users"."id" = "user_sports"."user_id" WHERE "user_sports"."sport_id" = ? AND "users"."id" = 7 LIMIT ?[0m  [["sport_id", 10], ["LIMIT", 5]]
+  Rendered pages/_user-sports.html.erb (14.6ms)
+  Rendered pages/main/_dashboard.html.erb (20.6ms)
+  Rendered pages/dashboard.html.erb within layouts/application (25.9ms)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "events" WHERE "events"."user_id" = ? AND "events"."viewed" = ?[0m  [["user_id", 10], ["viewed", "f"]]
+  Rendered events/_events-count.html.erb (2.8ms)
+  Rendered layouts/_navbar.html.erb (4.3ms)
+Completed 200 OK in 146ms (Views: 136.9ms | ActiveRecord: 3.2ms)
+
+
+[ActionCable] [User 10] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:20 -0300
+[ActionCable] [User 10] ActivityChannel stopped streaming from activity_channel
+[ActionCable] [User 10] RoomChannel stopped streaming from room_channel
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:21 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:21 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+[ActionCable] [User 10] Registered connection (Z2lkOi8vanVudGFyc2UvVXNlci8xMA)
+[ActionCable] [User 10] RoomChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] RoomChannel is streaming from room_channel
+[ActionCable] [User 10] ActivityChannel is transmitting the subscription confirmation
+[ActionCable] [User 10] ActivityChannel is streaming from activity_channel
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"MS6tVM36UxuMEjIWXiAl4QZNkM/dFF5UUlNYQU09ymazNqzaYMNSL+pXl3s7u8MtUhVw7NaoLgyoChJqC3BirA=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 55ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 83ms (Views: 81.4ms | ActiveRecord: 0.0ms)
+
+
+[ActionCable] [User 10] Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+[ActionCable] [User 10] ActivityChannel stopped streaming from activity_channel
+[ActionCable] [User 10] RoomChannel stopped streaming from room_channel
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:25 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:34 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:34 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:34 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:34 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:43 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:43 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:43 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:43 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:50 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:50 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:50 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:50 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:13:58 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:58 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:58 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:13:58 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:07 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:07 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:07 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:07 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:17 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:17 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:17 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:17 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:27 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:27 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:27 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:27 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:38 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:38 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:38 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:38 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:50 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:50 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:50 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:50 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:14:58 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 89ms (Views: 87.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:14:59 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:59 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:59 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:14:59 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:08 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:08 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:08 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:08 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:21 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:21 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:21 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:21 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:29 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:29 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:29 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:29 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:38 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:38 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:38 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:38 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:47 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:47 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:47 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:47 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:15:58 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:58 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:58 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:15:58 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:16:09 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:09 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:09 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:09 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:16:20 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:20 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:20 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:20 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:16:32 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:32 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:32 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:32 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:16:45 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:45 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:45 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:45 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:16:57 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:57 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:57 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:16:57 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:17:11 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:11 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:11 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:11 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:17:24 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:24 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:24 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:24 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:17:38 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:38 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:38 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:38 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:17:52 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:52 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:52 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:17:52 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:18:07 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:07 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:07 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:07 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:18:21 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:21 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:21 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:21 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:18:36 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:36 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:36 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:36 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:18:52 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:52 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:52 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:52 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:18:54 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 102ms (Views: 100.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:18:54 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:54 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:54 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:18:54 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:04 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:04 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:04 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:04 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:19:07 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 86ms (Views: 84.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:08 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:08 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:08 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:08 -0300
+Started GET "/" for 127.0.0.1 at 2018-04-18 21:19:11 -0300
+Processing by PagesController#index as HTML
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 431ms (Views: 430.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:12 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:12 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:12 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:12 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:21 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:21 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:21 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:21 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:34 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:34 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:34 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:34 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:43 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:43 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:43 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:43 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:19:52 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:52 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:52 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:19:52 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:20:02 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:02 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:02 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:02 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:20:13 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:13 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:13 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:13 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:20:24 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:24 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:24 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:24 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:20:36 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:36 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:36 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:36 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:20:48 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:48 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:48 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:20:48 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:21:01 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:01 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:01 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:01 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:21:14 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:14 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:14 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:14 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:21:28 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:28 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:28 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:28 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:21:42 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:42 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:42 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:42 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:21:56 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:56 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:56 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:21:56 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:22:11 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:11 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:11 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:11 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:22:26 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:26 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:26 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:26 -0300
+Started GET "/cable" for 127.0.0.1 at 2018-04-18 21:22:41 -0300
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:41 -0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:41 -0300
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2018-04-18 21:22:41 -0300

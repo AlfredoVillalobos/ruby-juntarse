@@ -9,7 +9,7 @@ end
 gem 'cancancan'
 gem 'carrierwave'
 gem 'devise'
-gem 'faker', group: :production
+gem 'faker'
 gem 'mini_magick'
 
 # geolocation
